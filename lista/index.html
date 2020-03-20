@@ -1,0 +1,133 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style>
+			#listBox{
+				overflow:auto;
+				height:400px;
+				width:300px;
+				border: 2px solid black;
+				float:left;
+			}
+			#menuBox{
+				margin-left:10px;
+				float:left;
+				height:300px;
+				width:300px;
+			}
+			.espaco{
+				margin-top:30px;
+			}
+			#menuBox button,#caixaManual{
+				display:block;
+				width:75%;
+			}
+			.itemListBox{
+				padding:5px;
+				font-size:1.4em;
+				border-bottom:1px solid gray;
+			}
+			#botaoDelete{
+				background-color:red;
+				color:white;
+				border:2px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="listBox"></div>
+		<div id="menuBox">
+			<button type="button" onClick="manualAdd()">Inserir valor manualmente</button>
+			<input type="number" id="caixaManual" onkeyup="manualAddEnter(event)" placeholder="Número a ser inserido"/>
+			<div class="espaco"></div>
+			<button type="button" onClick="gerarValor()">Gerar número aleatório</button>
+			<input type="checkbox" id="permitirNegativos"/>Permitir números negativos
+			<div class="espaco"></div>
+			<button type="button" onClick="organizarVetor('crescente')">Organizar lista (crescente)</button>
+			<button type="button" onClick="organizarVetor('decrescente')">Organizar lista (decrescente)</button>
+			<button type="button" onClick="embaralharVetor()">Embaralhar lista</button>
+			<button type="button" onClick="fibonacci()">Fibonacci</button>
+			<div class="espaco"></div>
+			<button type="button" id="botaoDelete"onClick="deletarVetor()">Deletar todos os números</button>
+		</div>
+		<script>
+			x = [];
+			
+			function fibonacci(){
+				a = 0;
+				b = 1;
+				t = parseInt(prompt("Sequência de fibonacci até que número?\n(Lista atual será apagada)"));
+				if (isNaN(t) == false){
+					deletarVetor();
+					while(a <= t){
+						x.push(a);
+						c = b + a;
+						a = b;
+						b = c;
+					}
+				}
+				mostrarValores();
+			}		
+			function manualAddEnter(event){
+				if (event.which == 13){
+					manualAdd();
+				}
+			}
+			function embaralharVetor(){
+				for(i=0;i<=x.length-1;i++){
+					a = Math.round(Math.random()*(x.length-1));
+					b = x[i];
+					x[i] = x[a]
+					x[a] = b;
+				}
+				mostrarValores();
+			}
+			function manualAdd(){
+				c = document.getElementById("caixaManual");
+				if (isNaN(parseFloat(c.value)))
+					alert("Valor Inválido");
+				else{
+					x.push(parseFloat(c.value));
+					mostrarValores();
+					c.value = "";
+					c.focus();
+				}
+			}
+			function gerarValor(){
+				r = Math.round(Math.random()*60);
+				if ((Math.round(Math.random()) == 1) && (document.getElementById("permitirNegativos").checked))
+					r = r*-1;
+				x.push(r);
+				mostrarValores();
+			}
+			function deletarVetor(){
+				l = x.length;
+				for(i=0;i<=l;i++){
+					x.splice(0,1);
+				}
+				limparListBox();
+			}
+			function limparListBox(){
+				document.getElementById("listBox").innerHTML = "";
+			}
+			function mostrarValores(){
+				limparListBox();
+				for(i=0;i<=x.length-1;i++){
+					document.getElementById("listBox").innerHTML += "<div class='itemListBox'>"+x[i]+"</div>";
+				}
+			}
+			function organizarVetor(crescente_decrescente){
+				for (l=0;l<=x.length-2;l++){
+					for (i=0;i<=x.length-2;i++){
+						if (((x[i] > x[i+1]) && (crescente_decrescente == "crescente")) || ((x[i] < x[i+1]) && (crescente_decrescente == "decrescente"))){
+							a = x[i+1];
+							x[i+1] = x[i];
+							x[i] = a;
+						}
+					}
+				}
+				mostrarValores();
+			}
+		</script>
+	</body>
+</html>
