@@ -1,4 +1,5 @@
-# leandro-rmc.github.io
-[Visualizar lista trabalhos na Web](index.html)
+# SENAC 2017 - JavaScript
+[Visualizar lista trabalhos na Web](leandro-rmc.github.io)
 
 Trabalhos de JavaScript, do curso Técnico em Informática, SENAC, 2017.
+Desculpem pela bagunça, foi feito com meu conhecimento de anos atrás.
