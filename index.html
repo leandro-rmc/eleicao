@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Germania+One');
+body,html{
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+}
+#principal{
+width:100%;
+height:100%;
+margin:0 auto;
+overflow:auto;
+background-color:white;
+background-size:cover;
+}
+#divCandidatos{
+margin:0 auto;
+width:50%;
+height:85%;
+display:none;
+min-height:500px;
+min-width:500px;
+}
+#divMenu{
+width:100%;
+height:100%;
+text-align:center;
+font-family: 'Germania One', cursive;
+font-size:1.4em;
+}
+#divMenu *{
+color:blue;
+font-size:2em;
+}
+#divMenu span:hover{
+color:red;
+cursor:pointer;
+}
+#preencher{
+width:100%;
+height:30%;
+}
+.itemCandidato{
+width:99%;
+height:19%;
+display:block;
+border:2px solid black;
+margin-top:15px;
+box-shadow: 2px 2px 2px gray;
+background-color:yellow;
+}
+.itemCandidato img{
+width:20%;
+height:100%;
+border-right:2px solid black;
+}
+.itemCandidato button{
+float:right;
+height:100%;
+width:20%;
+border-left:2px solid black;
+background-color:green;
+font-family: 'Germania One', cursive;
+}
+.infoCandidato{
+width:50%;
+height:100%;
+display:inline-block;
+vertical-align:top;
+font-family: 'Germania One', cursive;
+font-size:1.3em;
+overflow:auto;
+}
+#itemRetorno{
+background-color:transparent;
+box-shadow: 0px 0px 0px 0px white;
+border:0px;
+}
+#itemRetorno button{
+border:2px solid black;
+width:20%;
+margin-bottom:10px;
+font-size:1.2em;
+}
+.infoCandidato span{
+display:block;
+}
+.status{
+color:red;
+}
+#creditos{
+opacity:0.1;
+position:fixed;
+bottom:0;
+}
+#votosAleatorios{
+background-color:red;
+}
+#confirmarVoto{
+background-color:green;
+}
+#Resetar{
+background-color:red;
+}
+#graficos{
+position:relative;
+background-color:red;
+width:100%;
+margin-bottom:1%;
+border:2px solid black;
+margin-top:1%;
+}
+#graficos div{
+display:block;
+height:10%;
+width:0%;
+border-top:1px solid black;
+border-bottom:1px solid black;
+font-family: 'Germania One', cursive;
+background-color:blue;
+white-space: nowrap;
+color:white;
+margin-top:1%;
+margin-bottom:1%;
+}
+</style>
+</head>
+<body>
+<span id="creditos">Criado por Leandro Rocha Musser Carneiro - Senac Campo Grande/RJ</span>
+<div id="principal">
+	<div id="divMenu">
+		<div id="preencher"></div>
+		<span onClick="mostrarDivVotacao()">VOTAÇÃO</span><hr>
+		<span onClick="encerrarEleicoes()">ENCERRAR ELEIÇÃO</span>
+	</div>
+	<div id="divCandidatos">
+		<div id="divBolsonaro" class="itemCandidato">
+			<img src="Bolsonaro.jpg"/>
+				<div class="infoCandidato">
+					<span>Jair Bolsonaro</span><hr>
+					<span id="votosBolsonaro">Nenhum voto até agora.</span>
+					<span class="status" id="statusBolsonaro"></span>
+					<div class="radioDiv"><input type="radio" id="radioBolsonaro" name="candidato"/>Votar</div>
+				</div>
+			<!-- <button type="button" onClick="votar(0)">VOTAR</button> -->
+		</div>
+		<div id="divLula" class="itemCandidato">
+			<img src="Lula.jpg"/>
+				<div class="infoCandidato">
+					<span>Luiz Inácio Lula da Silva</span><hr>
+					<span id="votosLula">Nenhum voto até agora.</span>
+					<span class="status" id="statusLula"></span>
+					<div class="radioDiv"><input type="radio" id="radioLula" name="candidato"/>Votar</div>
+				</div>
+		<!-- <button type="button" onClick="votar(1)">VOTAR</button> -->
+		</div>
+		<div id="divCiro" class="itemCandidato">
+			<img src="Ciro.jpg"/>
+				<div class="infoCandidato">
+					<span>Ciro Gomes</span><hr>
+					<span id="votosCiro">Nenhum voto até agora.</span>
+					<span class="status" id="statusCiro"></span>
+					<div class="radioDiv"><input type="radio" id="radioCiro" name="candidato"/>Votar</div>
+				</div>
+			<!-- <button type="button" onClick="votar(2)">VOTAR</button> -->
+		</div>
+		<div id="divAlvaro" class="itemCandidato">
+			<img src="Alvaro.jpg"/>
+				<div class="infoCandidato">
+					<span>Álvaro Dias</span><hr>
+					<span id="votosAlvaro">Nenhum voto até agora.</span>
+					<span class="status" id="statusAlvaro"></span>
+					<div class="radioDiv"><input type="radio" id="radioAlvaro" name="candidato"/>Votar</div>
+				</div>
+		<!-- <button type="button" onClick="votar(3)">VOTAR</button> -->
+		</div>
+		<div id="divTiririca" class="itemCandidato">
+			<img src="Tiririca.jpg"/>
+				<div class="infoCandidato">
+					<span>Tiririca</span><hr>
+					<span id="votosTiririca">Nenhum voto até agora.</span>
+					<span class="status" id="statusTiririca"></span>
+					<div class="radioDiv"><input type="radio" id="radioTiririca" name="candidato"/>Votar</div>
+				</div>
+		<!-- <button type="button" onClick="votar(4)">VOTAR</button> -->
+		</div>
+		<div id="itemRetorno" class="itemCandidato">
+			<button type="button" id="Resetar" onClick="voltarMenuInicial()">Início</button>
+			<button type="button" id="votosAleatorios"onClick="votosAleatorios()">Votos Aleatórios</button>
+			<button type="button" id="confirmarVoto" onClick="votarB()">Confirmar voto</button>
+		</div>
+		<div id="graficos">
+			<div id="graficoBolsonaro">
+				<span>Bolsonaro - <span id="spanGraficoBolsonaro">Nenhum voto até agora.</span></span>
+			</div>
+			<div id="graficoLula">
+				<span>Lula - <span id="spanGraficoLula">Nenhum voto até agora.</span></span>
+			</div>
+			<div id="graficoCiro" id="spanGraficoCiro">
+				<span>Ciro - <span id="spanGraficoCiro">Nenhum voto até agora.</span></span>
+			</div>
+			<div id="graficoAlvaro" id="spanGraficoAlvaro">
+				<span>Álvaro - <span id="spanGraficoAlvaro">Nenhum voto até agora.</span></span>
+			</div>
+			<div id="graficoTiririca" id="spanGraficoTiririca">
+				<span>Tiririca - <span id="spanGraficoTiririca">Nenhum voto até agora.</span></span>
+			</div>
+		</div>	
+	</div>
+</div>
+<script>
+permitirEncerramento = false;
+fimEleicao = false;
+candidatos = [
+{nome:"Jair Bolsonaro",statusAtual:"",votos:0,img:"Bolsonaro.jpg",idspan:"votosBolsonaro",status:"statusBolsonaro",div:"divBolsonaro",radio:"radioBolsonaro",divGrafico:"graficoBolsonaro",spanGrafico:"spanGraficoBolsonaro"},
+{nome:"Luiz Inácio Lula da Silva",statusAtual:"",votos:0,img:"Lula.jpg",idspan:"votosLula",status:"statusLula",div:"divLula",radio:"radioLula",divGrafico:"graficoLula",spanGrafico:"spanGraficoLula"},
+{nome:"Ciro Gomes",statusAtual:"",votos:0,img:"Ciro.jpg",idspan:"votosCiro",status:"statusCiro",div:"divCiro",radio:"radioCiro",divGrafico:"graficoCiro",spanGrafico:"spanGraficoCiro"},
+{nome:"Álvaro Dias",statusAtual:"",votos:0,img:"Alvaro.jpg",idspan:"votosAlvaro",status:"statusAlvaro",div:"divAlvaro",radio:"radioAlvaro",divGrafico:"graficoAlvaro",spanGrafico:"spanGraficoAlvaro"},
+{nome:"Tiririca",statusAtual:"",votos:0,img:"Tiririca.jpg",idspan:"votosTiririca",status:"statusTiririca",div:"divTiririca",radio:"radioTiririca",divGrafico:"graficoTiririca",spanGrafico:"spanGraficoTiririca"}];
+
+function divEscondeMostra(divCandidatos,divMenu){
+document.getElementById("divCandidatos").style.display = divCandidatos;
+document.getElementById("divMenu").style.display = divMenu;
+}
+
+function votosAleatorios(){
+if (confirm("Essa função gerará votos para todos os candidatos. Confirma?") == true){
+permitirEncerramento = true;
+	for (o=0;o<=candidatos.length-1;o++){
+		r = Math.floor(Math.random()*20000);
+		candidatos[o].votos = r;
+	}
+	atualizarStatus();
+	atualizarspan();
+}
+}
+
+function mostrarDivVotacao(){
+divEscondeMostra("Block","none");
+}
+function voltarMenuInicial(){
+if (fimEleicao == true){
+	resetarEleicao();
+}
+else{
+	divEscondeMostra("none","block");
+}
+}
+
+function resetarEleicao(){
+//location.reload();
+	l = document.getElementsByClassName("radioDiv");
+	for (z=0;z<=l.length-1;z++){
+		l[z].style.display = "block";
+	}
+	document.getElementById("Resetar").innerHTML = "Início"
+	divEscondeMostra("none","block");
+	document.getElementById("principal").style.backgroundImage = "none";
+	for (h=0;h<=candidatos.length-1;h++){
+		document.getElementById(candidatos[h].divGrafico).style.width = "0%";
+		document.getElementById(candidatos[h].spanGrafico).innerHTML = "Nenhum voto até agora.";
+		document.getElementById(candidatos[h].div).style.display = "block";
+		candidatos[h].statusAtual = "";
+		candidatos[h].votos = 0;
+	}
+	permitirEncerramento = false;
+	fimEleicao = false;
+	atualizarspan();
+	b = document.getElementsByTagName("button");
+	for (h = 0;h<=b.length-1;h++){
+		document.getElementsByTagName("button")[h].style.display = "inline-block";
+	}
+}
+
+function encerrarEleicoes(){
+	if (confirm("Confirma o encerramento da eleição?") == true){
+	if (permitirEncerramento == true){
+		for (r=0;r<=candidatos.length-1;r++){
+			if (candidatos[r].statusAtual == ""){
+				document.getElementById(candidatos[r].div).style.display = "none";
+			}
+			else{
+				if (candidatos[r].statusAtual == "Vencendo"){
+						candidatos[r].statusAtual = "Vencedor da eleição!";
+						if (candidatos[r].nome == "Jair Bolsonaro"){
+							document.getElementById("principal").style.backgroundImage = "url(Bolsonaro.gif)"};
+						atualizarspan();
+				}
+				else{
+					candidatos[r].statusAtual = "Empatado! Segundo turno em breve.";
+					atualizarspan();
+				}
+			}
+		}
+		esconderTodosBotoes();
+		divEscondeMostra("Block","none");
+		fimEleicao = true;
+	}
+	else{
+		alert("A eleição só pode ser encerrada se pelo menos 1 candidato tiver 1 voto.");
+	}
+}
+}
+
+function esconderTodosBotoes(){
+	l = document.getElementsByClassName("radioDiv");
+	for (z=0;z<=l.length-1;z++){
+		l[z].style.display = "none";
+	}
+	b = document.getElementsByTagName("button");
+	for (z = 0;z<=b.length-1;z++){
+			if (document.getElementsByTagName("button")[z].id != "Resetar"){
+				document.getElementsByTagName("button")[z].style.display = "none";
+			}
+			else{
+				document.getElementsByTagName("button")[z].innerHTML = "Resetar eleição";
+			}
+	}
+}
+function MSVotos(){
+somaVotos = 0;
+maiorNVotos = 0;
+for (j=0;j<=candidatos.length-1;j++){
+	somaVotos = somaVotos + candidatos[j].votos;
+	if (candidatos[j].votos > maiorNVotos){
+		maiorNVotos = candidatos[j].votos;
+		quemMaiorNVotos = j;
+	}
+}
+return [somaVotos,maiorNVotos,quemMaiorNVotos];
+}
+function verificarEmpate(){
+empatantes = [];
+maiorNVotos = MSVotos()[1];
+for (q=0;q<=candidatos.length-1;q++){
+	if(maiorNVotos == candidatos[q].votos){
+		empatantes.push(q);
+	}
+}
+return empatantes;
+}
+
+function atualizarGraficos(){
+	for (u=0;u<=candidatos.length-1;u++){
+		if (candidatos[u].votos > 0){
+			document.getElementById(candidatos[u].divGrafico).style.width = ((candidatos[u].votos * 100) / MSVotos()[0])+"%";
+			document.getElementById(candidatos[u].spanGrafico).innerHTML = "Votos: "+candidatos[u].votos + " (" +(Math.floor(((candidatos[u].votos * 100) / MSVotos()[0]) * 100)/100)+"%)";
+		}
+		else{
+			document.getElementById(candidatos[u].divGrafico).style.width = "0%";
+			document.getElementById(candidatos[u].spanGrafico).innerHTML = "Nenhum voto até agora.";
+		}
+	}
+}
+
+function atualizarStatus(){
+	if (verificarEmpate().length <= 1){
+		for (m=0;m<=candidatos.length-1;m++){
+			if (m == MSVotos()[2]){
+				candidatos[m].statusAtual = "Vencendo";
+			}
+			else{
+				candidatos[m].statusAtual = "";
+			}
+		}
+	}
+	else{
+		lEmpatados = verificarEmpate();
+		for (m=0;m<=candidatos.length-1;m++){
+			for (n=0;n<=lEmpatados.length-1;n++){
+				if (m == lEmpatados[n]){
+					candidatos[m].statusAtual = "Empatado";
+					n = lEmpatados.length;
+				}
+				else{
+					candidatos[m].statusAtual = "";
+				}
+			}
+		}
+	}
+}
+
+function atualizarspan(){
+	atualizarGraficos();
+	for (i=0;i<=candidatos.length-1;i++){
+		if (candidatos[i].votos > 0){
+			porcentagem = (candidatos[i].votos * 100) / MSVotos()[0];
+			document.getElementById(candidatos[i].idspan).innerHTML = "Votos: "+candidatos[i].votos + " (" +(Math.floor(porcentagem * 100)/100)+"%)";
+		}
+		else{
+		document.getElementById(candidatos[i].idspan).innerHTML = "Nenhum voto até agora.";
+		}
+		document.getElementById(candidatos[i].status).innerHTML = candidatos[i].statusAtual;
+	}
+}
+
+function votarB(){
+	for (c=0;c<=candidatos.length-1;c++){
+		if (document.getElementById(candidatos[c].radio).checked == true){
+			document.getElementById(candidatos[c].radio).checked = false;
+			votar(c);
+		}
+	}
+}
+
+function votar(idCandidato){
+if (confirm("Confirma seu voto em "+candidatos[idCandidato].nome+"?") == true){
+	candidatos[idCandidato].votos++;
+	alert("Você votou com sucesso em "+candidatos[idCandidato].nome+"!");
+	permitirEncerramento = true;
+	atualizarStatus();
+	atualizarspan();
+	divEscondeMostra("none","block");
+}
+}
+
+</script>
+</body>
+</html>
