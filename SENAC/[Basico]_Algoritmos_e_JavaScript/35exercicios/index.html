@@ -1,0 +1,607 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style>
+			#exercicios{
+				height:600px;
+				width:400px;
+				border:2px solid black;
+				overflow:scroll;
+				float:left;
+			}
+			#quadroNegro{
+				height:600px;
+				width:400px;
+				border:2px solid black;
+				background-color:green;
+				margin-left:1%;
+				overflow:auto;
+				float:left;
+				color:white;
+				font-size:1.2em;
+			}
+			.exercicio{
+				width:98%;
+				border-top:1px solid black;
+				padding-bottom:5%;
+				margin-left:1%;
+			}
+			.exercicio:hover{
+				cursor:pointer;
+				background-color:red;
+				color:white;
+			}
+			#apagador{
+				background-color:red;
+				color:white;
+				float:right;
+			}
+		</style>
+	</head>
+	<body>
+		<b>Atenção</b>: Todos esses exercícios e enunciados foram criados e escritos pelo meu professor do SENAC, eu apenas os resolvi e montei o HTML, CSS e JS.*
+		<hr>
+		<div id="exercicios">
+			<div class="exercicio" onClick="ex1()">
+				<h1>Exercício 1</h1> Construir uma página, onde o usuário digitará dois números(através de prompt) e o programa abrirá um alert com a soma destes dois números.
+			</div>
+			<div class="exercicio">
+				<h1>Exercício 2</h1> Construir um programa, onde terá 3 inputs e um botão, o usuário digitará dois números nos dois primeiros inputs, e ao clicar no botão, o terceiro input aparecerá o resultado da soma destes números.
+				<br><input id="ex2Input1" placeholder="Número 1" type="number"></input><br>
+				<input id="ex2Input2" placeholder="Número 2" type="number"></input><br>
+				<input id="ex2Input3" placeholder="Resultado" readonly type="number"></input><br>
+				<button type="button" onclick="ex2()">Ok</button>
+			</div>
+			<div class="exercicio" onclick="ex3()">
+				<h1>Exercício 3</h1> Construir uma página, onde o usuário digitará um número, e o programa escreverá na tela o resultado do quadrado deste número(utilizar apenas operadores básicos).
+			</div>
+			<div class="exercicio" onclick="ex4()">
+				<h1>Exercício 4</h1> Construir um programa, onde o usuário digitará o seu nome, e a página escreverá no documento a mensagem “Seja bem vindo” mais o nome da pessoa.
+			</div>
+			<div class="exercicio" onclick="ex5()">
+				<h1>Exercício 5</h1> Construir uma página, onde o usuário digitará 2 números, e o programa exibirá na tela o resultado das quatro operações básicas da matemática.
+			</div>
+			<div class="exercicio" onclick="ex6()">
+				<h1>Exercício 6</h1> Construa uma página, onde o usuário digitará o ano que nasceu, e o programa irá escrever na tela, quantos anos ele completará em 2030.
+			</div>
+			<div class="exercicio" onclick="ex7()">
+				<h1>Exercício 7</h1> Construa uma página, onde o usuário digiratá o valor do seu salário, e o programa aumentará 15% do seu salário digitado.
+			</div>
+			<div class="exercicio" onclick="ex8()">
+				<h1>Exercício 8</h1> Construa uma página, onde o usuário digitará o valor de um produto, e o programa descontará 7% do valor do produto.
+			</div>
+			<div class="exercicio" onclick="ex9()">
+				<h1>Exercício 9</h1> Construa uma página, onde o usuário digitará 2 números, o programa exibirá na tela ou através de um alert o menor dos números digitados.
+			</div>
+			<div class="exercicio" onclick="ex10()">
+				<h1>Exercício 10</h1> Construir uma página, onde o usuário digitará quatro notas escolares, o programa calculará a média e caso seja menor que 6, exibirá na tela, “aluno reprovado”. Caso seja maior ou igual a 6, “aluno aprovado”.
+			</div>
+			<div class="exercicio" onclick="ex11()">
+				<h1>Exercício 11</h1> Construa uma página, onde o usuário digitará 3 números, o programa exibirá na tela, o maior entre eles.
+			</div>
+			<div class="exercicio" onClick="ex12()">
+				<h1>Exercício 12</h1> Construa uma página, onde o usuário digitará o seu peso e sua altura, o programa calculará o IMC(peso/altura²). Caso o IMC seja maior que 25, escrever na tela “Acima do peso ideal”, caso contrário, “peso OK”
+			</div>
+			<div class="exercicio" onclick="ex13()">
+				<h1>Exercício 13</h1> Construa uma página, onde o usuário digitará 4 notas escolares. Caso a nota seja abaixo de 4, o programa escreverá “aluno reprovado”, caso a nota seja maior que 7, escrever “aluno aprovado direto”, caso a nota seja maior que 4 e menor ou igual a 7, escrever “aluno em recuperação”. No ultimo caso, o programa pedirá a nota de recuperação, caso ela seja menor que 5, escrever “reprovado na recuperação” e caso contrário, escrever “aprovado na recuperação”.
+			</div>
+			<div class="exercicio" onClick="ex14()">
+				<h1>Exercício 14</h1> Construa uma página, onde o usuário digitará um número, e o programa dirá se este número é par ou ímpar.
+			</div>
+			<div class="exercicio" onclick="ex15()">
+				<h1>Exercício 15</h1> Construa um jogo de pedra, papel e tesoura.
+			</div>
+			<div class="exercicio" onclick="ex16()">
+				<h1>Exercício 16</h1> Construa uma página, que exiba na tela os números de um a cem.
+			</div>
+			<div class="exercicio" onclick="ex17()">
+				<h1>Exercício 17</h1> Construa uma página, que exiba na tela, a contagem regressiva de 10 a 0.
+			</div>
+			<div class="exercicio" onclick="ex18()">
+				<h1>Exercício 18</h1>	Construa uma página, que o usuário irá digitar um número através do prompt, e completará o número digitado até completar 100.
+			</div>
+			<div class="exercicio" onclick="ex19()">
+				<h1>Exercício 19</h1>	Construa uma página, onde o usuário digitará um número, e o programa completará o número digitado até 100 apenas com números pares.
+			</div>
+			<div class="exercicio" onclick="ex20()">
+				<h1>Exercício 20</h1>	Construa uma página, que exiba na tela, todas as horas possíveis em um dia.
+			</div>
+			<div class="exercicio" onclick="ex21()">
+				<h1>Exercício 21</h1>	Construa uma página, onde o usuário digitará um valor, e o programa mostrará na tela a tabuada de multiplicação deste número.
+			</div>
+			<div class="exercicio" onclick="ex22()">
+				<h1>Exercício 22</h1>	Construa uma página, que exiba a sequencia de Fibonacci de 0 até 2000.
+			</div>
+			<div class="exercicio" onclick="ex23()">
+				<h1>Exercício 23</h1>	Construa uma página, onde o usuário digitará um número, a página fará uma contagem regressiva até zero e depois contará de zero até o número que o usuário digitou.
+			</div>
+			<div class="exercicio" onclick="ex24()">
+				<h1>Exercício 24</h1>	Construa uma página, que só aceite notas escolares entre 0 e 10.
+			</div>
+			<div class="exercicio" onclick="ex25()">
+				<h1>Exercício 25</h1>	Construa uma página, onde o usuário digitará 6 numeros em um vetor e depois estes números, devem ser exibidos na tela na ordem digitada.
+			</div>
+			<div class="exercicio" onclick="ex26()">
+				<h1>Exercício 26</h1>	Construa uma página, onde o usuário digitará 10 numeros, o programa somará e calculará a média dos números digitados.
+			</div>
+			<div class="exercicio" onclick="ex27()">
+				<h1>Exercício 27</h1>	Construa uma página, onde o usuário digitará 8 números, o programa escreverá na tela qual deles é o maior, e qual deles é o menor.
+			</div>
+			<div class="exercicio" onclick="ex28()">
+				<h1>Exercício 28</h1>	Construir um programa, onde o usuário digitará 10 números, o programa deve calcular quantos deles são maiores que 10.
+			</div>
+			<div class="exercicio" onclick="ex29()">
+				<h1>Exercício 29</h1>	Construir uma página, onde o usuário digitará 7 números, o programa escreverá na tela, quantos deles são pares, e quantos são ímpares.
+			</div>
+			<div class="exercicio" onClick="ex30()">
+				<h1>Exercício 30</h1>	Construir uma página, onde o usuário digitará 5 números, o programa deverá colocar estes números dentro do vetor em ordem crescente.
+			</div>
+			<div class="exercicio" onClick="ex31()">
+				<h1>Exercício 31</h1>	Construir uma página, onde o usuário digitará o nome e a média de 10 alunos, o programa escreverá na tela o nome de todos com a média acima ou igual a 6.
+			</div>
+			<div class="exercicio" onclick="ex32()">
+				<h1>Exercício 32</h1>	Construir uma página, que o usuário digitará o nome e a idade de 10 pessoas, o programa escreverá o nome do usuário mais novo.
+			</div>
+			<div class="exercicio" onclick="ex33()">
+				<h1>Exercício 33</h1>	Construir uma página, onde o usuário digitará o nome, telefone e cidade de 10 pessoas, o programa exibirá na tela, o nome e o telefone das pessoas que moram em “Campo Grande”.
+			</div>
+			<div class="exercicio" onclick="ex34()">
+				<h1>Exercício 34</h1>	Construir uma página, onde o usuário digitatá o nome e bairro de 10 pessoas, o programa, exibirá o nome e bairro das pessoas em ordem alfabética.
+			</div>
+			<div class="exercicio" onclick="ex35()">
+				<h1>Exercício 35</h1>	Construa uma página, onde digitará o nome e a média de 5 alunos, o programa só aceitará a média do aluno, caso ela esteja entre 0 e 10.
+			</div>
+		</div>
+		<div id="quadroNegro">
+			<button type="button" id="apagador" onclick="limparQuadroNegro()">Limpar</button>
+		</div>
+		<script>
+				JKP_placarVoce = 0;
+				JKP_placarOponente = 0;
+				JKP_placarEmpate = 0;
+				quadroNegro = document.getElementById("quadroNegro");
+				
+			function escreverQuadroNegro(exercicio,texto){
+				quadroNegro.innerHTML = quadroNegro.innerHTML + "(Exercício "+exercicio+")<br><br>" + texto + "<hr>";
+			}
+			function limparQuadroNegro(){
+				quadroNegro.innerHTML = "<button type='button' id='apagador' onclick='limparQuadroNegro()'>Limpar</button>";
+			}
+			function ex1(){
+				a = prompt("Digite um número");
+				b = prompt("Digite um segundo número");
+				alert(parseFloat(a)+parseFloat(b));
+				escreverQuadroNegro(1,a+" + "+b+" = "+(parseFloat(a)+parseFloat(b)));
+			}
+			function ex2(){
+				document.getElementById("ex2Input3").value = parseFloat(document.getElementById("ex2Input1").value) + parseFloat(document.getElementById("ex2Input2").value);
+			}
+			function ex3(){
+				a = parseFloat(prompt("Digite um número"));
+				escreverQuadroNegro(3,"O quadrado do número "+a+" é "+(a*a));
+			}
+			function ex4(){
+				a = prompt("Digite seu nome");
+					escreverQuadroNegro(4,"Seja bem vindo, "+a);
+			}
+			function ex5(){
+				a = parseFloat(prompt("Digite um número"));
+				b = parseFloat(prompt("Digite um segundo número"));
+				s = (a +" + "+ b + " = " + (a+b) + "<br>") +
+					(a +" - "+ b + " = " + (a-b) + "<br>") +
+					(a +" * "+ b + " = " + (a*b) + "<br>") +
+					(a +" / "+ b + " = " + (a/b));
+					escreverQuadroNegro(5,s);
+			}
+			function ex6(){
+				a = parseInt(prompt("Digite o ano do seu nascimento"));
+					idadeAtual = 2017 - a;
+					idadeEm2030 = idadeAtual + (2030 - 2017);
+					escreverQuadroNegro(6,idadeEm2030);
+			}
+			function ex7(){
+				a = parseFloat(prompt("Digite seu salário"));
+				escreverQuadroNegro(7,"Seu salário (R$"+a+") com aumento de 15% é R$"+a*1.15);
+			}
+			function ex8(){
+				a = parseFloat(prompt("Digite o valor do produto"));
+				escreverQuadroNegro(8,"O valor do produto (R$"+a+") com desconto de 7% é R$"+a*0.93);
+			}
+			function ex9(){
+				a = parseFloat(prompt("Digite um número"));
+				b = parseFloat(prompt("Digite um número"));
+				if (a > b){
+					alert("O menor número é "+b);
+					escreverQuadroNegro(9,"O menor número é "+b);
+				}
+				else{
+					if (a < b){
+						alert("O menor número é "+a);
+						escreverQuadroNegro(9,"O menor número é "+a);
+					}
+					else{
+						if (a == b){
+							alert("Os números são iguais");
+							escreverQuadroNegro(9,"Os números são iguais");
+						}
+					}
+				}
+			}
+			function ex10(){
+				s = 0;
+				for (i = 1;i<=4;i++){
+					s = parseFloat(s) + parseFloat(prompt("Digite a nota número "+i));
+					m = s / 4;
+				}
+				if ((s / 4) < 6){
+					escreverQuadroNegro(10,"Sua média é "+(s / 4)+". Aluno reprovado");
+				}
+				else{
+					if ((s / 4) >= 6)
+						escreverQuadroNegro(10,"Sua média é "+(s / 4)+". Aluno aprovado");
+				}
+			}
+			function ex11(){
+				m = 0;
+				for (i=1;i<=3;i++){
+					a = parseFloat(prompt("Digite um número"));
+					if (i == 1)
+						m = a;
+					if (m < a)
+						m = a;
+				}
+				escreverQuadroNegro(11,"O maior número é "+m);
+			}
+			function ex12(){
+				peso = parseFloat(prompt("Digite seu peso (kg)"));
+				altura = parseFloat(prompt("Digite sua altura (metro)"));
+				IMC = peso / (altura * altura);
+				if (IMC > 25){
+					r = "Acima do peso ideal";
+				}
+				else{
+					r = "Peso OK";
+				}
+				s = ("Seu peso: "+peso+"<br>")+
+					("Sua altura: "+altura+"<br>")+
+					("Seu IMC: "+IMC+" ("+r+")");
+				escreverQuadroNegro(12,s);
+			}
+			function ex13(){
+				s = bri = "";
+				br = "</br>";
+				for (i=1;i<=4;i++){
+					if (i == 4)
+						br = "";
+					if (i != 1)
+						bri = "</br>";
+					n = parseFloat(prompt("Digite a nota "+i));
+					if (n < 4){
+						alert("Aluno reprovado");
+						s = s + bri+i+"º Nota : "+n+" - Aluno reprovado."+br;
+					}
+					else
+						if (n > 7){
+							alert("Aluno aprovado direto");
+							s = s + bri+i+"º Nota : "+n+" - Aluno aprovado direto."+br;
+						}
+						else{
+							alert("Aluno em recuperação");
+							s = s +bri+i+"º Nota : "+n+" - Aluno em recuperação.";
+							nr = parseFloat(prompt("Digite a nota de recuperação"));
+							if (nr < 5){
+								alert("Aluno reprovado na recuperação");
+								s = s +"<i><br>-Nota de recuperação: "+nr+".<br>-Aluno reprovado na recuperação.</i>"+br;
+							}
+							else{
+								alert("Aluno aprovado na recuperação");
+								s = s +"<i><br>-Nota de recuperação: "+nr+".<br>-Aluno aprovado na recuperação.</i>"+br;
+							}
+						}
+				}
+				escreverQuadroNegro(13,s);
+			}
+			function ex14(){
+				a = parseInt(prompt("Digite um número"));
+				if (a % 2 == 0)
+					escreverQuadroNegro(14,"O número "+a+" é par");
+				else
+					escreverQuadroNegro(14,"O número "+a+" é impar");
+			}
+			function ex15(){
+				itens = [
+				{nome:"Pedra",fraqueza:"Papel"},
+				{nome:"Papel",fraqueza:"Tesoura"},
+				{nome:"Tesoura",fraqueza:"Pedra"}];
+				limparQuadroNegro();
+				e = prompt("Digite 0 para pedra\nDigite 1 para papel\nDigite 2 para tesoura");
+				if (e == "0" || e == "1" || e == "2"){
+					o = Math.floor(Math.random()*3);
+					if (itens[parseInt(e)].fraqueza == itens[o].nome){
+						JKP_placarOponente++;
+						escreverQuadroNegro(15,"Você: "+itens[parseInt(e)].nome+"<br>"+"Oponente: "+itens[o].nome+"<br>Você perdeu.<br><br>Seu placar: "+JKP_placarVoce+"<br>Placar do oponente: "+JKP_placarOponente+"<br>Placar empate: "+JKP_placarEmpate);
+					}
+					else{
+						if (parseInt(e) == o){
+							JKP_placarEmpate++;
+							escreverQuadroNegro(15,"Você: "+itens[parseInt(e)].nome+"<br>"+"Oponente: "+itens[o].nome+"<br>Empate.<br><br>Seu placar: "+JKP_placarVoce+"<br>Placar do oponente: "+JKP_placarOponente+"<br>Placar empate: "+JKP_placarEmpate);
+						}
+						else{
+							JKP_placarVoce++;
+							escreverQuadroNegro(15,"Você: "+itens[parseInt(e)].nome+"<br>"+"Oponente: "+itens[o].nome+"<br>Você ganhou.<br><br>Seu placar: "+JKP_placarVoce+"<br>Placar do oponente: "+JKP_placarOponente+"<br>Placar empate: "+JKP_placarEmpate);
+						}
+					}
+				}
+			}
+			function ex16(){
+				s = "";
+				for (i=1;i<=100;i++){
+					s = s + i + "<br>";
+				}
+				escreverQuadroNegro(16,s);
+			}
+			function ex17(){
+				s = "";
+				for (i=10;i>=0;i--){
+					s = s + i + "<br>";
+				}
+				escreverQuadroNegro(17,s);
+			}
+			function ex18(){
+				s = "";
+				i = parseInt(prompt("Digite um número"));
+				for (i=i;i<=100;i++){
+					s = s + i + "<br>";
+				}
+				escreverQuadroNegro(18,s);
+			}
+			function ex19(){
+				s = ""
+				i = parseInt(prompt("Digite um número"));
+				if (i % 2 != 0)
+					i++;
+				for(i=i;i<=100;i=i+2){
+					s = s + i + "<br>";
+				}
+				escreverQuadroNegro(19,s);
+			}
+			function ex20(){
+				s = "";
+				for (h=0;h<=23;h++){
+					for(m=0;m<=59;m++){
+						s = s + h + ":" + m + "<br>";
+					}
+				}
+				escreverQuadroNegro(20,s);
+			}
+			function ex21(){
+				s = ""
+				n = parseInt(prompt("Digite um número"));
+				for(i=1;i<=10;i++){
+					s = s + n + " * " + i + " = " + (n*i) + "<br>";
+				}
+				escreverQuadroNegro(21,s);
+			}
+			function ex22(){
+				a = 0;
+				b = 1;
+				s = "";
+				while(a <= 2000){
+					s = s + a + "<br>";
+					c = b + a;
+					a = b;
+					b = c;
+				}
+				escreverQuadroNegro(22,s);
+			}
+			function ex23(){
+				s = ""
+				n = parseInt(prompt("Digite um número"));
+				for(i=n;i>=0;i--){
+					s = s + i + "<br>";
+				}
+				for(i=0;i<=n;i++){
+					s = s + i + "<br>";
+				}
+				escreverQuadroNegro(23,s);
+			}
+			function ex24(){
+				m = 0;
+				for (i=1;i<=4;i++){
+					n = parseFloat(prompt("Digite a nota número "+i));
+					if (n >= 0 && n<= 10){
+						m = n + m;
+					}
+					else{
+						alert("Digite uma nota válida de 0 a 10!");
+						i--;
+					}
+				}
+				escreverQuadroNegro(24,"A média das notas é: "+m/4);
+			}
+			function ex25(){
+				s = ""
+				v = [];
+				for (i=0;i<=5;i++){
+					n = parseInt(prompt("Digite o "+(i+1)+"º número"));
+					v[i] = n;
+					s = s + v[i] + "<br>";
+				}	
+				escreverQuadroNegro(25,s);
+			}
+			function ex26(){
+				//Apesar de ser possível fazer todos os cálculos dentro do primeiro for, criei um segundo só para usar melhor o vetor neste exercício.
+				s = ""
+				soma = media = 0;
+				v = [];
+				for (i=0;i<=9;i++){
+					n = parseInt(prompt("Digite o "+(i+1)+"º número"));
+					v[i] = n; 
+				}
+				for(i=0;i<=v.length-1;i++){
+					soma = soma + v[i];
+				}
+				media = soma / v.length;
+				s = s + "Média: "+media+"<br>Soma de todos: "+soma;
+				escreverQuadroNegro(26,s);
+			}
+			function ex27(){
+				s = ""
+				maior = menor = null;
+				v = [];
+				for (i=0;i<=7;i++){
+					n = parseInt(prompt("Digite o "+(i+1)+"º número"));
+					if (i == 0){
+						maior = n;
+						menor = n;
+					}
+					v[i] = n;
+					if (maior < v[i])
+						maior = v[i];
+					if (menor > v[i])
+						menor = v[i];
+				}	
+				escreverQuadroNegro(27,"Maior: "+maior+"<br>"+"Menor: "+menor);
+			}
+			function ex28(){
+			//Apesar de ser possível fazer todos os cálculos dentro do primeiro for, criei um segundo só para usar melhor o vetor nestes exercícios.
+				q = 0;
+				v = [];
+				for(i=0;i<=9;i++){
+					n = parseFloat(prompt("Digite o "+(i+1)+"º número"));
+					v[i] = n;
+				}
+				for (i=0;i<=v.length-1;i++){
+					if (v[i] > 10)
+						q++;
+				}
+				escreverQuadroNegro(28,"Total de números maiores que 10 no vetor: "+q);
+			}
+			function ex29(){
+				qImpar = qPar = 0;
+				v = [];
+				for(i=0;i<=6;i++){
+					n = parseFloat(prompt("Digite o "+(i+1)+"º número"));
+					v[i] = n;
+				}
+				for (i=0;i<=v.length-1;i++){
+					if (v[i] % 2 == 0)
+						qPar++;
+					else
+						qImpar++;
+				}
+				escreverQuadroNegro(29,"Total de números pares e ímpares no vetor: <br>Pares: "+qPar+"<br>Ímpares: "+qImpar);
+			}
+			function ex30(){
+				v = [];
+				s = "";
+				for(i=0;i<=4;i++){
+					n = parseFloat(prompt("Digite o "+(i+1)+"º número"));
+					v[i] = n;
+				}
+				for (j=0;j<=v.length-2;j++){
+					for (i=0;i<=v.length-2;i++){
+						if (v[i] > v[i+1]){
+							a = v[i+1];
+							v[i+1] = v[i];
+							v[i] = a;
+						}
+					}
+				}
+				for (i=0;i<=v.length-1;i++){
+					s = s + v[i] + "<br>";
+				}
+				escreverQuadroNegro(30,s);
+			}
+			function ex31(){
+				vetorNomeAluno = [];
+				vetorMediaAluno = [];
+				s = "";
+				for(i=0;i<=9;i++){
+					nomeAluno = prompt("Digite o nome do "+(i+1)+"º aluno");
+					n = parseFloat(prompt("Digite a nota dessa pessoa"));
+					vetorNomeAluno[i] = nomeAluno;
+					vetorMediaAluno[i] = n;
+				}
+				for (i=0;i<=vetorMediaAluno.length-1;i++){
+					if (vetorMediaAluno[i] >= 6)
+						s = s + vetorNomeAluno[i]+"<br>";
+				}
+				escreverQuadroNegro(31,s);
+			}
+			function ex32(){
+				nome = [];
+				idade = [];
+				maisNovo = 0;
+				for(i=0;i<=9;i++){
+					nomePessoa = prompt("Digite o nome da "+(i+1)+"º pessoa");
+					idadePessoa = parseFloat(prompt("Digite a idade dessa pessoa"));
+					nome[i] = nomePessoa;
+					idade[i] = idadePessoa;
+					if ((i == 0) || (idade[maisNovo] > idade[i]))
+						maisNovo = i;	
+				}
+				escreverQuadroNegro(32,"A pessoa mais nova é: "+nome[maisNovo]);
+			}
+			function ex33(){
+				nome = [];
+				telefone = [];
+				cidade = [];
+				s = "";
+				for(i=0;i<=9;i++){
+					nomePessoa = prompt("Digite o nome da "+(i+1)+"º pessoa");
+					nome[i] = nomePessoa;
+					telefonePessoa = prompt("Digite o telefone de "+nome[i]);
+					cidadePessoa = prompt("Digite a cidade de "+nome[i]);
+					telefone[i] = telefonePessoa;
+					cidade[i] = cidadePessoa;
+					cidadeLowerCase = cidade[i].toLowerCase();
+					if (cidadeLowerCase == "Campo Grande".toLowerCase()){
+						s = s + "Nome: "+nome[i]+"<br>Telefone: "+telefone[i]+"<br><br>";
+					}
+				}
+				escreverQuadroNegro(33,s);
+			}
+			function ex34(){
+				nome = [];
+				bairro = [];
+				s = "";
+				for(i=0;i<=9;i++){
+					nomePessoa = prompt("Digite o nome da "+(i+1)+"º pessoa");
+					nome[i] = nomePessoa;
+					bairroPessoa = prompt("Digite o bairro de "+nome[i]);
+					bairro[i] = bairroPessoa;
+				}
+				nome.sort();
+				bairro.sort();
+				for(i=0;i<=nome.length-1;i++){
+					s = s + nome[i]+"<br>";
+				}
+				s = s + "<br>";
+				for(i=0;i<=nome.length-1;i++){
+					s = s + bairro[i]+"<br>";
+				}
+				escreverQuadroNegro(34,s);
+			}
+			function ex35(){
+				nome = [];
+				media = [];
+				s = "";
+				for(i=0;i<=4;i++){
+					nomeAluno = prompt("Digite o nome do "+(i+1)+"º aluno");
+					mediaAluno = parseFloat(prompt("Digite a média do "+(i+1)+"º aluno"));
+					nome[i] = nomeAluno;
+					media[i] = mediaAluno;
+					if (mediaAluno >= 0 && mediaAluno <= 10){
+						s = s + "Nome: "+nome[i]+"<br>Média: "+media[i]+"<br><br>";
+					}
+					else{
+						alert("Apenas médias de 0 a 10!");
+						i--;
+					}
+				}
+				escreverQuadroNegro(35,s);
+			}
+		</script>
+	</body>
+</html>

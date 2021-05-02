@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bebidas</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+		<c:if test="${paginaId == 'index'}">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+		</c:if>
+		<link rel="stylesheet" href="css/estilo.css">
+	</head>
+	<body id="topo">
+		<div class="parallax bg-pizza-img">
+			<div class="bg-semitransparente-70">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<div class="container-fluid">
+						<button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navMenu">
+							<div class="navbar-nav mr-auto">
+								<a href="index.html" class="nav-item nav-link mr-4">Início</a>
+								<!--
+								<div class="dropdown dropdown-pizza mr-3">
+								  <a class="nav-item nav-link dropdown-toggle ${produtosAtivo}" href="#" role="button" data-toggle="dropdown">
+									Cardápio
+								  </a>
+								  <div class="dropdown-menu">
+									<a class="dropdown-item ${pizzaActive}" href="produtos.html?tipo=pizza">Pizzas</a>
+									<a class="dropdown-item ${bebidaActive}" href="produtos.html?tipo=bebida">Bebidas</a>
+									<a class="dropdown-item ${sobremesaActive}" href="produtos.html?tipo=sobremesa">Sobremesas</a>
+								  </div>
+								</div>
+								-->
+								<a href="pizzas.html" class="nav-item nav-link mr-4">Pizzas</a>
+								<a href="bebidas.html" class="nav-item nav-link mr-4 ${bebidaActive} active">Bebidas</a>
+								<a href="sobremesas.html" class="nav-item nav-link mr-4 ${sobremesaActive}">Sobremesas</a>
+								<a href="perfil.html" class="nav-item nav-link mr-4 ${perfilAtivo}">Perfil</a>	
+								<a href="pedidos.html" class="nav-item nav-link mr-4 ${pedidosAtivo}">Pedidos</a>	
+								<a href="carrinho.html" class="nav-item nav-link mr-4 ${carrinhoAtivo}">Carrinho <span class="badge badge-danger">3</span></a>
+							</div>	
+							
+							<div class="navbar-nav navbbar">
+								<c:if test="${sessionScope.logado == true}">
+									<a href="#" class="nav-item nav-link">Deslogar <span class="text-muted"></span></a>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<header class="pb-5 pt-5 text-light">
+					<div class="pb-5 container">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<div class="text-center">
+									<h1 class="display-4"><strong>Pizzaria Zefra</strong></h1>
+									<h6 class="lead">
+										<c:if test="${sessionScope.logado != true}">
+											Compre online e receba em casa!
+										</c:if>
+										<c:if test="${sessionScope.logado == true}">
+											Olá, <span class="text-laranja-escuro"><strong>Leandro</strong></span>
+										</c:if>
+									</h6>
+								</div>
+							</div>
+				
+						</div>
+					</div>
+				</header>
+			</div>
+		</div>
+
+<!--
+<c:forEach items="${sessionScope.carrinho}" var="c">
+	${c.value.quantidade}
+	${c.value.produtoVariedade.titulo}
+	${c.value.valor}
+</c:forEach>
+-->
+
+<div class="container mb-5">
+
+	<div class="row">
+	
+		<form data-produto-variedade="idProduto" class="h-100 col-12 col-sm-6 col-md-5 offset-md-1 offset-lg-0 col-lg-4 mt-5 mt-lg-5 ${cardClasses}" novalidate onsubmit="controleFormularioVariedade(this); return false" action="carrinho.html" method="POST">
+			<input type="hidden" name="id" value="${produtoModelo.idProduto}">
+			<input type="hidden" name="tipo" value="${produtoModelo.tipo}">
+			<input type="hidden" name="acao" value="addCarrinho">
+			
+			<input type="hidden" data-caracteristica="preco-base" value="4.50"/>
+			<div class="h-100 border-0 card card-responsivo rounded-0 card-shadow">
+				<div class="miniatura">
+					<img data-caracteristica="imagem" src="imagem/produto/cocacola.jpg"/>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col text-center">
+							<strong>
+								<span data-caracteristica="titulo">Coca-Cola</span>
+							</strong>
+						</div>
+					</div>							
+					<div class="row card-area-responsiva-descricao">
+						<div class="col text-center">
+							<span data-caracteristica="descricao">Garrafinha de 1,5 litros</span>
+						</div>
+					</div>			
+					<hr>
+					<div class="row card-area-responsiva-preco">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12">
+									<span data-caracteristica="quantidade"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<strong>
+										R$ <span data-caracteristica="total">
+										4,50</span>
+									</strong>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<c:set var="quantidade" value="0"></c:set>
+							<c:set var="classeMuted" value="text-muted"></c:set>
+							<c:forEach items="${sessionScope.carrinho}" var="c">
+								<c:if test="${produtoModelo.idProduto == c.value.produtoVariedade.idProduto}">
+									<c:set var="quantidade" value="${c.value.quantidade}"></c:set>
+									<c:set var="classeMuted" value=""></c:set>
+								</c:if>
+							</c:forEach>
+							<span class="font-monospace ${classeMuted}">(No <a class="${classeMuted}" href="carrinho.html">carrinho</a>: <strong>0</strong>)</span>
+						</div>
+					</div>
+					<hr>
+					
+					<label for="quantidade_${produtoModelo.idProduto}">Quantidade</label>
+					<input data-caracteristica="quantidade-selecionada" name="quantidade-selecionada" id="quantidade_1" type="number" placeholder="Quantidade" min="1" max="99999" value="1" class="form-control">
+					<div class="row mt-3">
+						<div class="col">
+							<button class="border-0 btn btn-pizza rounded float-right">Carrinho</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+				<form data-produto-variedade="idProduto" class="h-100 col-12 col-sm-6 col-md-5 offset-md-1 offset-lg-0 col-lg-4 mt-5 mt-lg-5 ${cardClasses}" novalidate onsubmit="controleFormularioVariedade(this); return false" action="carrinho.html" method="POST">
+			<input type="hidden" name="id" value="${produtoModelo.idProduto}">
+			<input type="hidden" name="tipo" value="${produtoModelo.tipo}">
+			<input type="hidden" name="acao" value="addCarrinho">
+			
+			<input type="hidden" data-caracteristica="preco-base" value="6.50"/>
+			<div class="h-100 border-0 card card-responsivo rounded-0 card-shadow">
+				<div class="miniatura">
+					<img data-caracteristica="imagem" src="imagem/produto/cocacola3.PNG"/>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col text-center">
+							<strong>
+								<span data-caracteristica="titulo">Coca-Cola</span>
+							</strong>
+						</div>
+					</div>							
+					<div class="row card-area-responsiva-descricao">
+						<div class="col text-center">
+							<span data-caracteristica="descricao">Garrafa de 2,5 litros</span>
+						</div>
+					</div>			
+					<hr>
+					<div class="row card-area-responsiva-preco">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12">
+									<span data-caracteristica="quantidade"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<strong>
+										R$ <span data-caracteristica="total">
+										6,50</span>
+									</strong>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<c:set var="quantidade" value="0"></c:set>
+							<c:set var="classeMuted" value="text-muted"></c:set>
+							<c:forEach items="${sessionScope.carrinho}" var="c">
+								<c:if test="${produtoModelo.idProduto == c.value.produtoVariedade.idProduto}">
+									<c:set var="quantidade" value="${c.value.quantidade}"></c:set>
+									<c:set var="classeMuted" value=""></c:set>
+								</c:if>
+							</c:forEach>
+							<span class="font-monospace ${classeMuted}">(No <a class="${classeMuted}" href="carrinho.html">carrinho</a>: <strong>2</strong>)</span>
+						</div>
+					</div>
+					<hr>
+					
+					<label for="quantidade_${produtoModelo.idProduto}">Quantidade</label>
+					<input data-caracteristica="quantidade-selecionada" name="quantidade-selecionada" id="quantidade_1" type="number" placeholder="Quantidade" min="1" max="99999" value="1" class="form-control">
+					<div class="row mt-3">
+						<div class="col">
+							<button class="border-0 btn btn-pizza rounded float-right">Carrinho</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+</div>
+		
+		<c:if test="${fn:length(produtos) == 0 }">
+			<div class="container py-5">
+				<div class="row">
+					<c:set var="erro_modelo_titulo" value="Ops!"></c:set>
+					<c:set var="erro_modelo_mensagem" value="Não encontramos produtos a venda com esta categoria. Sentimos muito pelo transtorno."></c:set>
+				</div>
+			</div>
+		</c:if>
+		<footer>
+			<div class="bg-dark py-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-7">
+							<h4 class="text-laranja-escuro mb-3 font-monospace">Pizzaria Zefra </h4>
+							<span class="text-light">CNPJ:</span>  <span class="text-muted">91.964.632/0001-20<br></span>
+							<span class="text-light">Email:</span> <span class="text-muted">pizzariazefra@gmail.com</span>
+						</div>
+						<div class="mt-3 mt-sm-0 col-sm-5 border-semitransparente-25">				
+							<div class="row pt-2">
+								<div class="col text-light display-4 text-lg-right">
+									<i class="fab fa-facebook"></i>
+									<i class="fab fa-twitter"></i>
+									<i class="fab fa-instagram"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-preto py-2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 text-muted text-center">
+							© 2018 - Desenvolvido por Leandro Rocha Musser Carneiro - leandro.musser@gmail.com
+							<a href="#" class="d-none d-sm-block text-light float-right">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>						
+						<div class="col-12 mt-3 text-center d-block d-sm-none">
+							<a href="#topo" class="text-light">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+
+<div id="modalConfirmacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalConfirmacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3" id="modalConfirmacao-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalConfirmacao-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+				</div>
+				<div class="col-6">
+					<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalAvaliacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalAvaliacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<form action="avaliarproduto.html" method="POST">
+				<div class="row">
+					<div class="col">
+						<label for="modalAvaliacao-textoAvaliacao">
+							Comentário <span class="text-muted font-monospace">(opcional)</span>
+						</label>
+						<textarea name="comentario" id="modalAvaliacao-textoAvaliacao" class="rounded texto-avaliacao" rows="6" class="form-control" placeholder="O que você achou do produto?"></textarea>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<label for="modalAvaliacao-notas">
+							Nota de 0 a 10
+						</label>
+						<select name="nota" id="modalAvaliacao-notas" class="form-control">
+							<c:forEach begin="0" end="10" varStatus="notas">
+								<option class="modalAvaliacao-option-nota modalAvaliacao-nota-${notas.index}" value="${notas.index}">${notas.index}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-6">
+						<input type="hidden" name="idProduto" id="modalAvaliacao-idProduto" value="0">
+						<button id="modalAvaliacao-enviar" class="form-control btn btn-success">Salvar</button>
+					</div>
+					<div class="col-6">
+						<button class="form-control btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<c:if test="${fn:length(tipoPagamento) != 0}">
+
+	<div id="modalConfirmacaoPedido" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+			<h5 id="modalConfirmacaoPedido-titulo" class="modal-title lead m-auto"></h5>
+	      </div>
+	      <div class="modal-body">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="py-3 text-center" id="modalConfirmacaoPedido-mensagem">
+						</div>
+						
+						<div class="mt-2">
+							<label for="modalConfirmacaoPedido-tipoPagamento" class="d-block text-muted">Tipo de pagamento</label>
+							<select id="modalConfirmacaoPedido-tipoPagamento" name="tipoPagamento" class="form-control">
+								<c:forEach items="${tipoPagamento}" var="tp">
+									<option value="${tp.id}"><c:out value="${tp.tipo}"></c:out></option>
+								</c:forEach>
+								<!--
+								<option value="1">Dinheiro</option>
+								<option value="2">Cartão de Crédito</option>
+								<option value="3">Cartão de Débito</option>
+								 -->
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	      </div>
+	      
+	      <div class="modal-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<button id="modalConfirmacaoPedido-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+					</div>
+					<div class="col-6">
+						<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</c:if>
+
+
+
+<div id="modalSucesso" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalSucesso-titulo" class="m-auto text-success modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalSucesso-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalSucesso-ok" data-dismiss="modal" type="button" class="form-control btn">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalErro" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalErro-titulo" class="m-auto text-danger modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalErro-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalErro-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalEdicaoCarrinho" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalEdicaoCarrinho-titulo" class="m-auto modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3">
+						<div class="form-group">
+							<label for="quantidade">Quantidade</label>
+							<input class="form-control" type="number" class="form-control" id="modalEdicaoCarrinho-quantidade">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-salvar" type="button" class="form-control btn btn-warning">Salvar</button>
+				</div>
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+		
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+		
+		<script charset="utf-8" src="js/modal.js"></script>
+		<script charset="utf-8" src="js/produto.js"></script>
+		
+	</body>
+</html>

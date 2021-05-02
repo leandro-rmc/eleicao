@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body,html{
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+}
+#divCalculadora{
+height:90%;
+width:20%;
+margin:0 auto;
+text-align:center;
+}
+.botaoNumero,.botaoOpcao{
+width:30.4%;
+height:10%;
+font-size:2em;
+}
+.botaoOpcao,.botaoOperador{
+color:blue;
+}
+.botaoOperador{
+width:20%;
+height:8%;
+font-size:2em;
+margin-bottom:5px;
+}
+#visor{
+width:100%;
+font-size:2em;
+margin-bottom:5px;
+color:white;
+background-color:blue;
+}
+button:hover{
+background-color:red;
+color:white;
+cursor:pointer;
+}
+#centralizar{
+height:10%;
+}
+</style>
+</head>
+<body>
+<div id="centralizar"></div>
+<div id="divCalculadora">
+	<input id="visor" type="text" readonly></input>
+	<button class="botaoNumero"type="button" onclick="escrever(1)">1</button>
+	<button class="botaoNumero"type="button" onclick="escrever(2)">2</button>
+	<button class="botaoNumero"type="button" onclick="escrever(3)" >3</button>
+	<button class="botaoNumero"type="button" onclick="escrever(4)">4</button>
+	<button class="botaoNumero"type="button" onclick="escrever(5)">5</button>
+	<button class="botaoNumero"type="button" onclick="escrever(6)">6</button>
+	<button class="botaoNumero"type="button" onclick="escrever(7)">7</button>
+	<button class="botaoNumero"type="button" onclick="escrever(8)">8</button>
+	<button class="botaoNumero"type="button" onclick="escrever(9)">9</button>
+	<button class="botaoOpcao"type="button" onclick="ce()">CE</button>
+	<button class="botaoNumero"type="button" onclick="escrever(0)">0</button>
+	<button class="botaoOpcao"type="button"onclick="resultado()">=</button>
+	<hr>
+	<button class="botaoOperador"type="button" onClick="calcular('+')">+</button>
+	<button class="botaoOperador"type="button" onClick="calcular('-')">-</button>
+	<button class="botaoOperador"type="button" onClick="calcular('/')">/</button>
+	<button class="botaoOperador"type="button" onClick="calcular('x')">x</button>
+</div>
+<script>
+
+a = b = op = "";
+rr = ar = false;
+
+function ce(){
+if (rr == true){
+	a = document.getElementById("visor").value;
+	b = op = "";
+}
+if (b != ""){
+	b = "";
+}
+else{
+	if (op != ""){
+		op = "";
+	}
+	else{
+		a = "";
+	}
+}
+if ((a == "") && (b == "") && (op == "")){
+	document.getElementById("visor").value = "";
+}
+else{
+	document.getElementById("visor").value = a+" "+op+" "+b;
+}
+	ar = false;
+}
+function resultado(){
+	if (ar == true){
+		a = parseFloat(a);
+		b = parseFloat(b);
+		switch(op){
+			case "+":
+				if (rr == false)
+					r = a + b;
+				else
+					r = r + b;
+				break;
+			case "-":
+				if (rr == false)
+					r = a - b;
+				else
+					r = r - b;
+					break;
+			case "/":
+				if (rr == false)
+					r = a / b;
+				else
+					r = r / b;
+				break;
+			case "x":
+				if (rr == false)
+					r = a * b;
+				else
+					r = r * b;
+				break;
+		}
+		rr = true;
+		document.getElementById("visor").value = r;
+	}
+}
+function escrever(valor){
+	if (rr == true){
+		rr = false;
+		a = document.getElementById("visor").value;
+		b = "";
+		ar = false;
+	}
+	if (op == ""){
+		a += valor;
+		document.getElementById("visor").value = a+" "+op+" "+b;
+	}
+	else{
+		b += valor;
+		if (b != "")
+		ar = true;
+	}
+	document.getElementById("visor").value = a+" "+op+" "+b;
+}
+function calcular(valor){
+	if (a != ""){
+		op = valor;
+		escrever("");
+	}
+}
+</script>
+</body>
+</html>

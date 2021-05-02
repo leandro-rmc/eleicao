@@ -1,6 +1,5 @@
-# SENAC 2017 ~ 2018 - Algoritmo / JavaScript / Bootstrap
-[Visualizar lista de trabalhos na Web](https://leandro-rmc.github.io/)
+# SENAC - Algoritmo e Front-End
 
-Foram feitos do zero com meu conhecimento de anos atrás, portanto o código pode estar bagunçado, duplicado, indo contra boas práticas, etc. O design também não é meu forte, mas dou meu máximo para construir algo limpo e intuitivo. Apesar do aumento de conhecimento nesse quesito de lá pra cá, continua sendo algo que não é do meu completo interesse. 
+Feitos no curso Técnico em Informática, do SENAC. Todos eles foram feitos do zero (exceções foram deixadas claras lá) com meu nível de conhecimento da época (2017 a 2018). No Front-End, usei Boostrap, jQuery, Wow.js, mas também foi usado CSS e JavaScript puros em certos trabalhos e projetos.
 
-Não são nada demais, porém é interessante rever.
+[Visualizar na Web](https://leandro-rmc.github.io/)

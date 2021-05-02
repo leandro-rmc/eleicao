@@ -1,0 +1,473 @@
+			*{
+				box-sizing: border-box;
+				font-family:sans-serif, tahoma, verdana, arial;
+			}
+			#portview{
+				max-width:960px;
+				margin:0 auto;
+				min-height:100%;
+				position:relative;
+			}
+			body{
+				background-color:#FFFAFA;
+			}
+			body,html{
+				min-height:100%;
+				height:100%;
+			}
+			header{
+				display:block;
+				background-color:#1a1a1a;
+				padding:15px;
+				overflow:auto;
+				border-radius:10px;
+			}
+			header form{
+				display:block;
+				float:right;
+			}
+			header img{
+				display:block;
+				float:left;
+				margin-right:20px;
+				border-radius:10px;
+			}
+			header h1{
+				margin:0;
+				font-weight:bold;
+				color:white;
+			}
+			header h2{
+				color:white;
+				display:none;
+			}
+			header small{
+				display:block;
+				letter-spacing:0;
+			}
+			header a{
+				text-decoration:none;
+				color:black;
+			}
+			content{
+				display:block;
+				overflow:auto;
+				margin-bottom:10px;
+				margin-top:10px;
+			}
+			.fullWidthImg{
+				width:100%;
+				border-radius:70px;
+				height:300px;
+			}
+			nav{
+				display:block;
+				width:20%;
+				float:left;
+			}
+			nav a{
+				display:block;
+				background-color:#1a1a1a;
+				padding:10px;
+				margin-top:7px;
+				color:#FFF;
+				text-decoration:none;
+				font-weight:bold;
+			}
+			nav a:hover{
+				background-color:red;
+				color:white;
+			}
+			.central{
+				width:80%;
+				float:left;
+				padding-left:20px;
+			}
+			footer{
+				display:block;
+				background-color:#1a1a1a;
+				overflow:auto;
+				padding:15px;
+			}
+			content{
+				min-height:100%;
+			}
+			footer a{
+				display:block;
+				width:15%;
+				float:left;
+				color:#FFF;
+			}
+			footer div{
+				width:70%;
+				float:left;
+				text-align:center;
+				font-style:italic;
+				color:#FFF;
+			}
+			footer a:last-child{
+				text-align:right;
+			}
+			.mensagemAviso{
+				color:red;
+				visibility:hidden;
+			}
+			#tmensagemAviso{
+				display:block;
+			}
+			form label{
+				display:block;
+			}
+			#formContato input{
+				width:50%;
+			}
+			.caixaTutorial img:first-child{
+				float:left;
+				border-radius:100%;
+				margin-right:30px;
+			}
+			.caixaTutorial{
+				border:1px solid black;
+				padding:5px;
+				overflow:auto;
+				width:90%;
+				margin:0 auto;
+			}
+			.caixaTutorial:not(:first-child){
+				margin-top:10px;
+			}
+			.caixaTutorial:hover{
+				background-color:#E8E8E8;
+			}
+			.caixaTutorial div{
+				clear:both;
+				display:none;
+				padding-top:15px;
+			}
+			.caixaTutorial div *{
+				padding-top:15px;
+				padding-bottom:15px;
+			}
+			.caixaTutorial iframe, .caixaTutorial img:not(:first-child){
+				width:100%;
+			}
+			.btnToggle{
+				float:right;
+				border:1px solid black;
+				border-radius:10px;
+				padding:10px;
+				margin-left:10px;
+				background-color:black;
+			}
+			.fa-arrow-down{
+				color:white;
+			}
+			.fa-arrow-up{
+				color:red;
+			}
+			.btnToggle:hover{
+				cursor:pointer;
+			}
+			.caixaDemon:not(last-child){
+				margin-bottom:10px;
+			}
+			.caixaDemonWhoIs > div:not(:last-child){
+				font-weight:bold;
+			}
+			.caixaDemonWhoIs > div{
+				text-align:center;
+			}
+			.caixaDemonWhoIs > div:last-child{
+				width:180px;
+			}
+			.caixaDemonSkills div div:nth-child(2){
+				color:red;
+				font-weight:bold;
+			}
+			.caixaDemonWhoIs{
+				max-width:180px; 
+				float:left; 
+			}
+			.caixaDemon img{
+				border-radius:20%; 
+				border:3px solid black; 
+				margin-right:5px; 
+				width:150px;
+				height:180px;
+				margin-left:15px;
+			}
+			.caixaDemonStats:not(:last-child) div{
+				border:2px solid black;
+				padding:2px;
+				background-color:white;
+				font-weight:bold;
+				margin-bottom:3px;
+			}
+			.caixaDemonStats span{
+				float:right;
+				color:blue;
+			}
+			.caixaDemonResist div{
+				background-color:white;
+				border:2px solid black;
+				overflow:auto;
+			}
+			.caixaDemonResist div:not(:last-child){
+				margin-bottom:3.7px;
+			}
+			.caixaDemonResist div span:first-child{
+				font-weight:bold;
+			}
+			.caixaDemonResist div:last-child span:last-child{
+				font-weight:bold;
+				color:red;
+			}
+			.caixaDemonResist div:not(last-child) span:last-child{
+				font-weight:bold;
+				color:blue;
+			}
+			.caixaDemonResist span{
+				display:block;
+			}
+			.caixaDemonSkills > div{
+				background-color:white;
+				border:2px solid black;
+			}
+			.caixaDemonSkills > div:not(:first-child){
+				border-top:1px solid black;
+			}		
+			.caixaDemonSkills > div:not(:last-child){
+				margin-bottom:5px;
+			}
+			.caixaDemonSkills > div *:first-child{
+				font-weight:bold;
+			}
+			#tButton{
+				text-align:center;
+				display:none;
+			}
+			#searchDemon{
+				display:inline-block; 
+				position:relative;
+			}
+			#helpBox{
+				position:absolute; 
+				z-index: 1; 
+				background-color:white; 
+				margin-top:20px;
+				border:1px solid black; 
+				width:100%; 
+				max-height:180px; 
+				overflow: auto;
+				display:none;
+			}
+			#helpBox *:hover{
+				background-color:black;
+				color:white;
+				cursor:pointer;
+			}
+			#closeBox{
+				position:absolute; 
+				background-color:#DCDCDC; 
+				border-right:1px solid black; 
+				border-left:1px solid black; 
+				border-top:1px solid black; 
+				color:black;
+				text-align:center;
+				width:100%; 
+				height:20px; 
+				display:none;
+				z-index:999;
+			}
+			#closeBox:hover{
+				cursor:pointer;
+			}
+			#filtro{
+				width:250px;
+				margin-top:10px;
+				border:1px double black;
+				border-radius:5px;
+				position:relative; 
+				overflow:auto;
+				padding:3px;
+				display:block;
+			}
+			#filtro div{
+				display:inline-block;
+				width:48%;
+			}
+			#filtro > div *{
+				width:100%;
+				padding:1px;
+			}
+			#selectArea,#searchDemon{
+				width:250px;
+				display:block;
+			}
+			#selectArea *, #searchDemon *{
+				width:100%;
+			}
+			#filtro > div:first-child select{
+				height:150px;
+			}
+			#filtro > div:nth-child(1){
+				float:right;
+			}
+			#filtro > button:last-child{
+				position:absolute;
+				bottom:0;
+				right:0;
+			}
+			#searchArea{
+				margin-bottom:10px;
+			}
+			.caixaDemon{
+				border:3px solid black; 
+				overflow:auto; 
+				padding:5px;
+				background-color:#DCDCDC;
+				width:680px;
+			}
+			.caixaDemonSkills{
+				float:left; 
+				width:200px; 
+				margin-left:10px;
+			}
+			.caixaDemonStats{
+				float:right; 
+				width:90px;
+			}
+			.caixaDemonResist{
+				float:left;
+				width:170px;
+				margin-left:5px;
+			}
+			.caixaDemonSkills > div:hover{
+				cursor:pointer;
+				background-color:yellow;
+			}
+			#demonsNaTela{
+				margin-bottom:10px;
+			}
+			.comentario{
+				width:100%;
+				margin-bottom:15px;
+				border-left:1px solid black;
+				border-right:1px solid black;
+				border-top:1px solid black;
+			}
+			.comentario > div{
+				border-bottom:1px solid black;
+				overflow:auto;
+				position:relative;
+				padding:5px;
+			}
+			.comentario > div *{
+				display:inline-block;
+			}
+			.comentario > div:not(:last-child){
+				background-color:#32CD32;
+			}
+			.comentario > div:last-child{
+				padding-bottom:5px;
+			}
+			#mensagemComentario{
+				font-weight:bold;
+			}
+			@media screen and (max-width:900px){
+				.caixaDemon{
+					width:500px;
+				}
+				.caixaDemonResist{
+					display:inline-block;
+					width:100%;
+					margin-top:10px;
+				}
+				.caixaDemonResist > div{
+					display:inline-block;
+					width:48%;
+					margin-right:2px;
+				}
+				.caixaDemonStats{
+					display:inline-block;
+					float:left;
+				}
+			}
+			@media screen and (max-width:810px){
+				.central{
+					width:70%;
+				}
+				header h1{
+					display:none;
+				}
+			}
+			@media screen and (max-width:680px){
+				nav{
+					width:100%;
+				}
+				#tButton{
+					display:block;
+				}
+				nav a:not(#tButton){
+					display:none;
+				}
+				.central{
+					width:96%;
+					margin-top:20px;
+				}
+				.mensagemAviso{
+					display:block;
+				}
+				header form{
+					width:90%;
+					float:left;
+				}
+				#s{
+					width:85%;
+					margin-bottom:10px;
+				}
+				.fullWidthImg{
+					height:150px;
+				}
+			}
+			@media screen and (max-width:650px){
+				#formContato textarea{
+					width:95%;
+				}
+				.fullWidthImg{
+					height:250px;
+				}
+			}
+			@media screen and (max-width:540px){
+				.caixaDemon{
+					width:100%;
+				}
+				.caixaDemonWhoIs *{
+					max-width:150px;
+				}
+				.caixaDemonResist > div{
+					width:30%;
+					font-size:0.9em;
+					float:left;
+				}
+				.caixaDemonResist,.caixaDemonResist > div{
+					width:98%;
+				}
+				.caixaDemonSkills{
+					margin-top:20px;
+					float:right;
+					clear:right;
+				}
+				.caixaDemonStats{
+					float:right;
+				}
+			}	
+			@media screen and (max-width:400px){
+				.caixaDemonWhoIs img{
+					height:180px;
+					width:110px;
+				}
+				.caixaDemonSkills{
+					width:100%;
+				}
+			}

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Perfil</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+		<c:if test="${paginaId == 'index'}">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+		</c:if>
+		<link rel="stylesheet" href="css/estilo.css">
+	</head>
+	<body id="topo">
+		<div class="parallax bg-pizza-img">
+			<div class="bg-semitransparente-70">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<div class="container-fluid">
+						<button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navMenu">
+							<div class="navbar-nav mr-auto">
+								<a href="index.html" class="nav-item nav-link mr-4">Início</a>
+								<!--
+								<div class="dropdown dropdown-pizza mr-3">
+								  <a class="nav-item nav-link dropdown-toggle ${produtosAtivo}" href="#" role="button" data-toggle="dropdown">
+									Cardápio
+								  </a>
+								  <div class="dropdown-menu">
+									<a class="dropdown-item ${pizzaActive}" href="produtos.html?tipo=pizza">Pizzas</a>
+									<a class="dropdown-item ${bebidaActive}" href="produtos.html?tipo=bebida">Bebidas</a>
+									<a class="dropdown-item ${sobremesaActive}" href="produtos.html?tipo=sobremesa">Sobremesas</a>
+								  </div>
+								</div>
+								-->
+								<a href="pizzas.html" class="nav-item nav-link mr-4">Pizzas</a>
+								<a href="bebidas.html" class="nav-item nav-link mr-4 ${bebidaActive}">Bebidas</a>
+								<a href="sobremesas.html" class="nav-item nav-link mr-4 ${sobremesaActive}">Sobremesas</a>
+								<a href="perfil.html" class="nav-item nav-link mr-4 ${perfilAtivo} active">Perfil</a>	
+								<a href="pedidos.html" class="nav-item nav-link mr-4 ${pedidosAtivo}">Pedidos</a>	
+								<a href="carrinho.html" class="nav-item nav-link mr-4 ${carrinhoAtivo}">Carrinho <span class="badge badge-danger">3</span></a>
+							</div>	
+							
+							<div class="navbar-nav navbbar">
+								<c:if test="${sessionScope.logado == true}">
+									<a href="#" class="nav-item nav-link">Deslogar <span class="text-muted"></span></a>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<header class="pb-5 pt-5 text-light">
+					<div class="pb-5 container">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<div class="text-center">
+									<h1 class="display-4"><strong>Pizzaria Zefra</strong></h1>
+									<h6 class="lead">
+										<c:if test="${sessionScope.logado != true}">
+											Compre online e receba em casa!
+										</c:if>
+										<c:if test="${sessionScope.logado == true}">
+											Olá, <span class="text-laranja-escuro"><strong>Leandro</strong></span>
+										</c:if>
+									</h6>
+								</div>
+							</div>
+				
+						</div>
+					</div>
+				</header>
+			</div>
+		</div>
+		
+		<div class="container-fluid my-4">
+			<div class="row">
+				<div class="col-12 col-md-8 offset-0 offset-md-2">
+					<div class="card my-4 card-shadow ${estilo}">
+						<div class="card-header text-center">
+							<c:if test="${param.acao != 'editar'}">
+								<h4>Meus dados</h4>
+							</c:if>
+						</div>
+						<div class="row">
+							<div class="card-body col-12 col-sm-10 offset-sm-1">
+								<div id="cadastro-conta">
+<!-- Alterar formulário -->			<form onsubmit="validarCadastro(this); return false" method="POST" action="perfil.html">
+										<c:if test="${param.acao == 'editar'}">
+											<input type="hidden" name="acao" value="salvarEdicao">
+										</c:if>
+										<div class="form-group">
+											<label for="nome">Nome completo</label>
+											<input readonly data-campo="nome" class="${requestScope.isInvalidNome} form-control" value="Leandro Rocha Musser Carneiro" id="nome" name="nome" type="text">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="nome" class="invalid-feedback">
+													${requestScope.erroNome}
+												</div>
+											</c:if>
+										</div>	
+										
+										<c:if test="${param.acao != 'editar'}">
+											<div class="form-group">
+												<label for="dataNascimento">Data de nascimento <span class="text-muted"></span></label>
+												<input readonly class=" form-control" id="dataNascimento" value="XX/XX/1993" name="dataNascimento" type="text">
+											</div>
+										</c:if>
+																		
+										<div class="form-group">										
+											<div class="form-row">
+												<div class="col-12 mb-3 mb-sm-0 col-sm-6">
+													<label for="telefone">Telefone <span class="text-muted"></span></label>
+													<input data-campo="telefone" readonly class="${requestScope.isInvalidTelefone} form-control" id="telefone" value="(21) XXXXXXXX" name="telefone" type="tel" maxlength="14" >
+													<c:if test="${param.acao == 'editar'}">
+														<div data-campo="telefone" class="invalid-feedback">
+															${requestScope.erroTelefone}
+														</div>
+													</c:if>
+												</div>
+												<div class="col-12 col-sm-6">
+													<label for="celular">Celular <span class="text-muted"></span></label>
+													<input data-campo="celular" readonly class="${requestScope.isInvalidCelular} form-control" id="celular" value="(21) 9853XXXXX" name="celular" type="tel" maxlength="14" >
+													<c:if test="${param.acao == 'editar'}">
+														<div data-campo="celular" class="invalid-feedback">
+															${requestScope.erroCelular}
+														</div>
+													</c:if>
+												</div>
+											</div>			
+										</div>
+																				
+										<div class="form-group">
+											<label for="email">Email</label>
+											<input data-campo="email" readonly class="${requestScope.isInvalidEmail} form-control" id="email" value="leandro.musser@gmail.com" type="email" name="email">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="email" class="invalid-feedback">
+													${requestScope.erroEmail}
+												</div>
+											</c:if>
+										</div>
+										<hr>
+										
+										<div class="form-group">				
+											<label for="cep">CEP <span class="text-muted"></span></label>
+											<input data-campo="cep" readonly class="${requestScope.isInvalidCep} form-control" id="cep" value="21XXXXXX" type="text" name="cep">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="cep" class="invalid-feedback">
+													${requestScope.erroCep}
+												</div>
+											</c:if>
+										</div>
+										
+										<div class="form-group">
+											<label for="cidade">Cidade <span class="text-muted"></span></label>
+											<input data-campo="cidade" readonly class="${requestScope.isInvalidCidade} form-control" id="cidade" value="Rio de Janeiro" type="text" name="cidade">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="cidade" class="invalid-feedback">
+													${requestScope.erroCidade}
+												</div>
+											</c:if>
+										</div>	
+										
+										
+										<div class="form-group">
+											<label for="bairro">Bairro <span class="text-muted"></span></label>
+											<input data-campo="bairro" readonly class="${requestScope.isInvalidBairro} form-control" id="bairro" value="XXXXX" type="text" name="bairro">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="bairro" class="invalid-feedback">
+													${requestScope.erroBairro}
+												</div>
+											</c:if>
+										</div>	
+										
+										<div class="form-group">				
+											<div class="form-row">
+												<div class="mb-3 mb-sm-0 col-sm-8 col-md-9">
+													<label for="logradouro">Logradouro</label>
+													<input data-campo="logradouro" readonly class="${requestScope.isInvalidLogradouro} form-control" id="logradouro" value="XXXXX" type="text" name="logradouro">
+													<c:if test="${param.acao == 'editar'}">
+														<div data-campo="logradouro" class="invalid-feedback">
+															${requestScope.erroLogradouro}
+														</div>
+													</c:if>
+												</div>
+												<div class="col-sm-4 col-md-3">
+													<label for="numero">Número</label>
+													<input data-campo="numero" readonly class="${requestScope.isInvalidNumero} form-control" id="numero" value="00000" type="number" name="numero">
+													<c:if test="${param.acao == 'editar'}">
+														<div data-campo="numero" class="invalid-feedback">
+															${requestScope.erroNumero}
+														</div>
+													</c:if>
+												</div>
+											</div>		
+										</div>	
+										
+										<div class="form-group">
+											<label for="complemento">Complemento <span class="text-muted"></span></label>
+											<input data-campo="complemento" readonly class="${requestScope.isInvalidComplemento} form-control" id="complemento" value="" type="text" name="complemento">
+											<c:if test="${param.acao == 'editar'}">
+												<div data-campo="complemento" class="invalid-feedback">
+													${requestScope.erroComplemento}
+												</div>
+											</c:if>
+										</div>
+			
+										<div class="form-group">
+											<c:if test="${param.acao != 'editar'}">	
+												<a href="perfil.html?acao=editar">
+													<button type="button" class="btn btn-pizza btn-lg">Editar</button>
+												</a>
+											</c:if>
+										</div>
+									</form>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+						<footer>
+			<div class="bg-dark py-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-7">
+							<h4 class="text-laranja-escuro mb-3 font-monospace">Pizzaria Zefra </h4>
+							<span class="text-light">CNPJ:</span>  <span class="text-muted">91.964.632/0001-20<br></span>
+							<span class="text-light">Email:</span> <span class="text-muted">pizzariazefra@gmail.com</span>
+						</div>
+						<div class="mt-3 mt-sm-0 col-sm-5 border-semitransparente-25">				
+							<div class="row pt-2">
+								<div class="col text-light display-4 text-lg-right">
+									<i class="fab fa-facebook"></i>
+									<i class="fab fa-twitter"></i>
+									<i class="fab fa-instagram"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-preto py-2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 text-muted text-center">
+							© 2018 - Desenvolvido por Leandro Rocha Musser Carneiro - leandro.musser@gmail.com
+							<a href="#" class="d-none d-sm-block text-light float-right">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>						
+						<div class="col-12 mt-3 text-center d-block d-sm-none">
+							<a href="#topo" class="text-light">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+<div id="modalConfirmacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalConfirmacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3" id="modalConfirmacao-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalConfirmacao-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+				</div>
+				<div class="col-6">
+					<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalAvaliacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalAvaliacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<form action="avaliarproduto.html" method="POST">
+				<div class="row">
+					<div class="col">
+						<label for="modalAvaliacao-textoAvaliacao">
+							Comentário <span class="text-muted font-monospace">(opcional)</span>
+						</label>
+						<textarea name="comentario" id="modalAvaliacao-textoAvaliacao" class="rounded texto-avaliacao" rows="6" class="form-control" placeholder="O que você achou do produto?"></textarea>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<label for="modalAvaliacao-notas">
+							Nota de 0 a 10
+						</label>
+						<select name="nota" id="modalAvaliacao-notas" class="form-control">
+							<c:forEach begin="0" end="10" varStatus="notas">
+								<option class="modalAvaliacao-option-nota modalAvaliacao-nota-${notas.index}" value="${notas.index}">${notas.index}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-6">
+						<input type="hidden" name="idProduto" id="modalAvaliacao-idProduto" value="0">
+						<button id="modalAvaliacao-enviar" class="form-control btn btn-success">Salvar</button>
+					</div>
+					<div class="col-6">
+						<button class="form-control btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<c:if test="${fn:length(tipoPagamento) != 0}">
+
+	<div id="modalConfirmacaoPedido" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+			<h5 id="modalConfirmacaoPedido-titulo" class="modal-title lead m-auto"></h5>
+	      </div>
+	      <div class="modal-body">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="py-3 text-center" id="modalConfirmacaoPedido-mensagem">
+						</div>
+						
+						<div class="mt-2">
+							<label for="modalConfirmacaoPedido-tipoPagamento" class="d-block text-muted">Tipo de pagamento</label>
+							<select id="modalConfirmacaoPedido-tipoPagamento" name="tipoPagamento" class="form-control">
+								<c:forEach items="${tipoPagamento}" var="tp">
+									<option value="${tp.id}"><c:out value="${tp.tipo}"></c:out></option>
+								</c:forEach>
+								<!--
+								<option value="1">Dinheiro</option>
+								<option value="2">Cartão de Crédito</option>
+								<option value="3">Cartão de Débito</option>
+								 -->
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	      </div>
+	      
+	      <div class="modal-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<button id="modalConfirmacaoPedido-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+					</div>
+					<div class="col-6">
+						<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</c:if>
+
+
+
+<div id="modalSucesso" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalSucesso-titulo" class="m-auto text-success modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalSucesso-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalSucesso-ok" data-dismiss="modal" type="button" class="form-control btn">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalErro" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalErro-titulo" class="m-auto text-danger modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalErro-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalErro-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalEdicaoCarrinho" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalEdicaoCarrinho-titulo" class="m-auto modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3">
+						<div class="form-group">
+							<label for="quantidade">Quantidade</label>
+							<input class="form-control" type="number" class="form-control" id="modalEdicaoCarrinho-quantidade">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-salvar" type="button" class="form-control btn btn-warning">Salvar</button>
+				</div>
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+	</body>
+</html>

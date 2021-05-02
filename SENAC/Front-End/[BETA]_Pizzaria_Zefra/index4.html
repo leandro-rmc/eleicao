@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pizzaria Zefra</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<style>
+			.topo{
+				background-size:cover;
+				background-attachment:fixed;
+				background-image: url('pizzabg.jpg');﻿
+			}
+			.bg-semitransparente{
+				background-color:rgba(0,0,0,0.6);
+			}
+			.bg-pizza{
+				background: linear-gradient(90deg, rgba(107, 0, 25, 1), rgba(107, 14, 0, 1));
+			}
+			.btn-pizza{
+				background-color: #85291b;
+				color:#fff;
+				border:1px solid rgba(0,0,0,0.3);
+			}
+			.btn-pizza:hover{
+				color:#aaa;
+			}
+			
+			.painel-nav-tabs .nav-item a.active{
+				background: rgba(0,0,0,0.3)!important;
+			}	
+			
+			.painel-nav-tabs .nav-item a{
+				color:#fff!important;
+			}
+
+			@media (max-width : 575px) {
+				.painel-nav-tabs{
+					border:none!important;
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="topo">
+			<div class="bg-semitransparente">
+				<nav class="navbar navbar-expand-sm navbar-dark bg-pizza">
+					<button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navMenu">
+						<ul class="navbar-nav ml-4 m-auto">
+							<li class="nav-item">
+								<a href="#" class="nav-link mr-4 active">Home</a>
+							</li>					
+							<li class="nav-item">
+								<a href="#" class="nav-link mr-4">Pizzas</a>
+							</li>					
+							<li class="nav-item">
+								<a href="#" class="nav-link mr-4">Bebidas</a>
+							</li>					
+							<li class="nav-item">
+								<a href="#" class="nav-link mr-4">Sobremesas</a>
+							</li>								
+							<li class="nav-item">
+								<a href="#" class="nav-link mr-4"><span><i class="fas fa-shopping-cart"></i> Carrinho</span></a>
+							</li>							
+						</ul>
+					</div>
+				</nav>
+				<header class="mt-2 py-5 text-light">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="pt-lg-4 d-none d-lg-block text-center">
+									<h1 class="display-4"><strong>Pizzaria Neos</strong></h1>
+									<h6 class="lead">Compre online e receba em casa!</h6>
+								</div>
+							</div>
+							<div class="col-lg-5">
+								<div class="card bg-semitransparente1 bg-pizza text-center">
+									<div class="card-header">
+										<h4>Painel de controle</h4>
+									</div>
+									<div class="card-body">
+									
+										<ul class="painel-nav-tabs nav nav-tabs flex-column flex-sm-row" role="tablist">
+										  <li class="nav-item">
+											<a class="nav-link active" data-toggle="tab" href="#home" role="tab">Acesso</a>
+										  </li>
+										  <li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#profile" role="tab">Compra</a>
+										  </li>
+										</ul>
+
+										<div class="tab-content mt-4">
+											<div class="tab-pane fade show active" id="home" role="tabpanel">
+												<a href="#" class="btn btn-block btn-pizza">Registrar</a>
+												<a href="#" class="btn btn-block btn-pizza">Entrar</a>
+											</div>
+											<div class="tab-pane fade" id="profile" role="tabpanel">
+												<a href="#" class="btn btn-block btn-pizza p-2">Carrinho</a>						
+											</div>
+										</div>					
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+			</div>
+		</div>
+		
+		<section style="background: linear-gradient(90deg,#ff6600,#ff8600)" class="b1g-pizza">
+			<div class="text-center text-light p-4">
+				<h2 class="display-5">Por quê comprar na Pizzaria Neos?</h2>
+				<p class="lead">Desça e descubra!</p>
+			</div>
+			
+		</section>
+		
+		<footer>
+			
+		</footer>
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</body>
+</html>

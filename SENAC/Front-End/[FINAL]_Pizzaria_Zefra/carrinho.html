@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pizzas</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+		<c:if test="${paginaId == 'index'}">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+		</c:if>
+		<link rel="stylesheet" href="css/estilo.css">
+	</head>
+	<body id="topo">
+		<div class="parallax bg-pizza-img">
+			<div class="bg-semitransparente-70">
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<div class="container-fluid">
+						<button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navMenu">
+							<div class="navbar-nav mr-auto">
+								<a href="index.html" class="nav-item nav-link mr-4">Início</a>
+								<!--
+								<div class="dropdown dropdown-pizza mr-3">
+								  <a class="nav-item nav-link dropdown-toggle ${produtosAtivo}" href="#" role="button" data-toggle="dropdown">
+									Cardápio
+								  </a>
+								  <div class="dropdown-menu">
+									<a class="dropdown-item ${pizzaActive}" href="produtos.html?tipo=pizza">Pizzas</a>
+									<a class="dropdown-item ${bebidaActive}" href="produtos.html?tipo=bebida">Bebidas</a>
+									<a class="dropdown-item ${sobremesaActive}" href="produtos.html?tipo=sobremesa">Sobremesas</a>
+								  </div>
+								</div>
+								-->
+								<a href="pizzas.html" class="nav-item nav-link mr-4">Pizzas</a>
+								<a href="bebidas.html" class="nav-item nav-link mr-4 ${bebidaActive}">Bebidas</a>
+								<a href="sobremesas.html" class="nav-item nav-link mr-4 ${sobremesaActive}">Sobremesas</a>
+								<a href="perfil.html" class="nav-item nav-link mr-4 ${perfilAtivo}">Perfil</a>	
+								<a href="pedidos.html" class="nav-item nav-link mr-4 ${pedidosAtivo}">Pedidos</a>	
+								<a href="carrinho.html" class="nav-item nav-link mr-4 ${carrinhoAtivo} active">Carrinho <span class="badge badge-danger">3</span></a>
+							</div>	
+							
+							<div class="navbar-nav navbbar">
+								<c:if test="${sessionScope.logado == true}">
+									<a href="#" class="nav-item nav-link">Deslogar <span class="text-muted"></span></a>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<header class="pb-5 pt-5 text-light">
+					<div class="pb-5 container">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<div class="text-center">
+									<h1 class="display-4"><strong>Pizzaria Zefra</strong></h1>
+									<h6 class="lead">
+										<c:if test="${sessionScope.logado != true}">
+											Compre online e receba em casa!
+										</c:if>
+										<c:if test="${sessionScope.logado == true}">
+											Olá, <span class="text-laranja-escuro"><strong>Leandro</strong></span>
+										</c:if>
+									</h6>
+								</div>
+							</div>
+				
+						</div>
+					</div>
+				</header>
+			</div>
+		</div>
+
+	
+	
+	<div class="container-fluid pt-4 pb-5">
+	
+		<!--
+			Caso não tenha nada no carrinho, isso não aparece
+		-->
+		<c:if test="${fn:length(sessionScope.carrinho) > 0 }">
+			<c:set var="quantidadeTotalProdutos" value="0"></c:set>
+			<c:set var="valorTotalProdutos" value="0"></c:set>
+			<c:forEach items="${sessionScope.carrinho}" var="c">
+				<c:choose>
+					<c:when test="${c.value.tipo != 'pizza'}">
+						<c:set var="quantidadeTotalProdutos" value="${quantidadeTotalProdutos + c.value.quantidade}"></c:set>
+						<c:set var="valorTotalProdutos" value="${valorTotalProdutos + c.value.valor}"></c:set>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${c.value.itemPedidoPizza}" var="p">
+							<c:set var="quantidadeTotalProdutos" value="${quantidadeTotalProdutos + p.quantidade}"></c:set>
+							<c:set var="valorTotalProdutos" value="${valorTotalProdutos + p.preco}"></c:set>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		
+			<div class="row mb-4">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="row">
+						<div class="col">
+							<div class="d-flex flex-row text-dark">
+								<div class="pr-5">
+									<span class="font-monospace">Total</span>
+									<h2>
+										<span>
+											R$ 106,50
+										</span>
+									</h2>
+								</div>
+								<div>
+									<span class="font-monospace">Itens</span>
+									<h2>
+										<span>3</span><span class="font-monospace"></span>
+									</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-12">
+							<c:choose>
+								<c:when test="${sessionScope.logado != true}">
+									<c:set var="modalPedido" value="criarModalErro('Ops!', 'Acesse a sua <a href=logar.jsp>conta</a> para finalizar seu pedido. <span class=d-block>Caso não tenha uma conta, clique <a href=cadastrar.jsp>aqui</a> para criar uma.</span>')"></c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="modalPedido" value="criarModalConfirmacaoPedido('Confirmação','Finalizar seu pedido?',this)"></c:set>
+								</c:otherwise>
+							</c:choose>
+							
+							<form onsubmit="${modalPedido}; return false" action="#" method="POST" class="float-right d-block">
+								<input type="hidden" name="acao" value="novoPedido">
+								<input data-caracteristica="tipoPagamento" type="hidden" name="tipoPagamento" value="1">
+								<button class="btn btn-dark">Finalizar pedido</button>
+							</form>
+							<form onsubmit="criarModalConfirmacao('Confirmação','Deseja realmente limpar seu carrinho?',this,'ACAO_NEGATIVA'); return false" action="carrinho.html" method="POST" class="px-2 float-right">
+								<input type="hidden" name="acao" value="limparCarrinho">
+								<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="d-flex flex-column-reverse col-lg-8 offset-lg-2 px-0">
+			
+				<c:forEach items="${sessionScope.carrinho}" var="c">
+					<c:if test="${c.value.tipo == 'pizza'}">
+						<div class="card card-shadow mb-4">
+							<div class="card-header">
+								<div>
+										<c:forEach items="${c.value.itemPedidoPizza}" var="p" end="0">
+											<span class="text-muted d-block">Pizza de sabor </span>
+											<h5 class="m-0 cards-title mr-auto mb-2">
+												
+												<a href="produto1.html">
+													Mussarela
+												</a>
+											</h5>
+										</c:forEach>
+									<span class="text-justify">
+										<!-- ${c.value.produtoVariedade.descricao} -->
+										<!-- <span class="text-muted">Tamanho:</span> <strong>Grande.</strong> <br> -->
+										<!-- <span class="text-muted">Contém:</span> <strong>Mussarela, Catupiri e Teste.</strong><br> -->
+										<!-- <span class="text-muted">Retirado:</span> <strong>Orégano e Batata Frita. </strong><br> -->
+										
+										<c:out value="${c.value.produtoVariedade.descricao}"/>
+									</span>
+								</div>
+							</div>
+							<div class="card-body pizza-container">
+								<div id="pizzaCombinacoes">
+									<c:forEach items="${c.value.itemPedidoPizza}" var="p" varStatus="loopPizza">
+										<c:if test="${loopPizza.count == 1}">
+											<c:set var="show" value="show"></c:set>
+										</c:if>
+										<div class="card my-2 mb-4 bg-light">
+											<div class="card-header">
+												<button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapsePizza_<c:out value='${loopPizza.count}'/>_<c:out value='${p.produtoPizza.idProduto}'/>">
+										        	<span>Combinação 1</span>
+										        </button>
+											</div>
+											<div id="collapsePizza_<c:out value='${loopPizza.count}'/>_<c:out value='${p.produtoPizza.idProduto}'/>" class="collapse show"> <!-- <c:out value="${show}"/> -->
+											    <div class="card-body">
+											    	<div class="row">
+											    		<div class="col-12">
+											    			<span class="text-muted">Tamanho: </span><strong><span>Família</span></strong>
+											     		</div>
+											     		<div class="col-12">
+											     			<span class="text-muted">Quantidade: </span><strong><span>1</span></strong>
+														</div>
+														<div class="col-12">
+															<span class="text-muted">Valor Total: </span><strong><span>R$ 55,00</span></strong>
+											  	 		</div>
+											  	 		<c:if test="${fn:length(p.ingredientesRemovidos) != 0}">
+															<div class="col-12 mt-3">
+															
+																	<span class="text-muted">Removido: </span>
+																
+																<c:forEach items="${p.ingredientesRemovidos}" var="i" varStatus="loopIngredientesRemovidos">
+		
+																	<strong>Ketchup</strong>
+																</c:forEach>
+												  	 		</div>
+												  	 	</c:if>
+											  	 	</div>
+											  	 	
+													<div class="row">	
+														<div class="col-12">			  	 	
+															<form data-produto-carrinho="idProduto" class="d-inline-block" onsubmit="criarModalEdicaoCarrinho('Edição de produto',this,1); return false" action="carrinho.html" method="POST">
+																<input type=hidden name="acao" value="editarProduto">
+																<input type=hidden name="codigoProtecao" value="${p.codigoProtecao}">
+																<input type=hidden name="tipo" value="pizza">
+																<input type=hidden name="indexPizza" value="<c:out value='${loopPizza.index}'/>">
+																<input data-caracteristica="quantidade-selecionada" type="hidden" name="quantidade">
+																<input type="hidden" name="id" value="${p.produtoPizza.idProduto}">
+																<button class="btn btn-warning mt-3"><i class="far fa-edit"></i></button>
+															</form>
+															<form onsubmit="criarModalConfirmacao('Confirmação','Deseja realmente remover esta pizza do seu carrinho?',this,'ACAO_NEGATIVA'); return false" action="carrinho.html" method="POST" class="float-right">
+																<input type=hidden name="tipo" value="pizza">
+																<input type="hidden" name="acao" value="removerProduto">
+																<input type=hidden name="codigoProtecao" value="${p.codigoProtecao}">
+																<input type=hidden name="indexPizza" value="<c:out value='${loopPizza.index}'/>">
+																<input type="hidden" name="id" value="${p.produtoPizza.idProduto}">
+																<button class="btn btn-danger mt-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+															</form>
+														</div>
+													</div>
+								
+											    </div>
+										    </div>
+										</div>
+										<c:set var="show" value=""></c:set>
+																<div class="card my-2 mb-4 bg-light">
+											<div class="card-header">
+												<button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapsePizza_<c:out value='${loopPizza.count}'/>_<c:out value='${p.produtoPizza.idProduto}'/>">
+										        	<span>Combinação 2</span>
+										        </button>
+											</div>
+											<div id="collapsePizza_<c:out value='${loopPizza.count}'/>_<c:out value='${p.produtoPizza.idProduto}'/>" class="collapse show"> <!-- <c:out value="${show}"/> -->
+											    <div class="card-body">
+											    	<div class="row">
+											    		<div class="col-12">
+											    			<span class="text-muted">Tamanho: </span><strong><span>Brotinho</span></strong>
+											     		</div>
+											     		<div class="col-12">
+											     			<span class="text-muted">Quantidade: </span><strong><span>1</span></strong>
+														</div>
+														<div class="col-12">
+															<span class="text-muted">Valor Total: </span><strong><span>R$ 45,00</span></strong>
+											  	 		</div>
+											  	 	</div>
+											  	 	
+													<div class="row">	
+														<div class="col-12">			  	 	
+															<form data-produto-carrinho="idProduto" class="d-inline-block" onsubmit="criarModalEdicaoCarrinho('Edição de produto',this,1); return false" action="carrinho.html" method="POST">
+																<input type=hidden name="acao" value="editarProduto">
+																<input type=hidden name="codigoProtecao" value="${p.codigoProtecao}">
+																<input type=hidden name="tipo" value="pizza">
+																<input type=hidden name="indexPizza" value="<c:out value='${loopPizza.index}'/>">
+																<input data-caracteristica="quantidade-selecionada" type="hidden" name="quantidade">
+																<input type="hidden" name="id" value="${p.produtoPizza.idProduto}">
+																<button class="btn btn-warning mt-3"><i class="far fa-edit"></i></button>
+															</form>
+															<form onsubmit="criarModalConfirmacao('Confirmação','Deseja realmente remover esta pizza do seu carrinho?',this,'ACAO_NEGATIVA'); return false" action="carrinho.html" method="POST" class="float-right">
+																<input type=hidden name="tipo" value="pizza">
+																<input type="hidden" name="acao" value="removerProduto">
+																<input type=hidden name="codigoProtecao" value="${p.codigoProtecao}">
+																<input type=hidden name="indexPizza" value="<c:out value='${loopPizza.index}'/>">
+																<input type="hidden" name="id" value="${p.produtoPizza.idProduto}">
+																<button class="btn btn-danger mt-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+															</form>
+														</div>
+													</div>
+								
+											    </div>
+										    </div>
+										</div>
+										<c:set var="show" value=""></c:set>
+									</c:forEach>
+								</div>
+								
+								<!--
+								<c:if test="${fn:length(c.value.itemPedidoPizza) > 1}">
+									<form onsubmit="criarModalConfirmacao('Confirmação','Deseja realmente remover todas as pizzas deste sabor do seu carrinho?',this,'ACAO_NEGATIVA'); return false" action="carrinho.html" method="POST" class="float-right">
+										<input type="hidden" name="acao" value="removerProduto">
+										<input type="hidden" name="id" value="${c.value.produtoVariedade.idProduto}">
+										<button class="btn btn-danger mt-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+									</form>
+								</c:if>
+								-->
+								
+							</div>
+						</div>
+						
+						<!-- 
+						<c:forEach items="${c.value.itemPedidoPizza}" var="p">
+							${p.tamanho.nomeTamanho}<br>
+							${p.quantidade}<br>
+							${p.produtoPizza.titulo}<br>
+							<button class="btn btn-dark mt-3">Detalhes</button>
+						</c:forEach>
+						-->
+					</c:if>
+					<c:if test="${c.value.tipo != 'pizza'}">
+						<div class="card card-shadow mb-4">
+							<!-- Adicionar algo para a pizza! -->
+							<div class="card-header">
+								<div>
+									<h5 class="m-0 cards-title mr-auto mb-2">Coca-Cola</h5>
+									<span class="text-justify">
+										<!-- ${c.value.produtoVariedade.descricao} -->
+										<!-- <span class="text-muted">Tamanho:</span> <strong>Grande.</strong> <br> -->
+										<!-- <span class="text-muted">Contém:</span> <strong>Mussarela, Catupiri e Teste.</strong><br> -->
+										<!-- <span class="text-muted">Retirado:</span> <strong>Orégano e Batata Frita. </strong><br> -->
+										
+										Garrafa de 2,5 litros
+									</span>
+								</div>
+							</div>
+							<div class="card-body">
+								<div>
+									<span class="text-muted">Quantidade: </span><strong><span>1</span></strong>
+								</div>
+								<div>
+									<span class="text-muted">Valor Total: </span><strong><span>R$ 6,50</span></strong>
+								</div>
+								<form data-produto-carrinho="idProduto" class="d-inline-block" onsubmit="criarModalEdicaoCarrinho('Edição de produto',this,1); return false" action="carrinho.html" method="POST">
+									<input type=hidden name="acao" value="editarProduto">
+									<input data-caracteristica="quantidade-selecionada" type="hidden" name="quantidade">
+									<input type=hidden name="tipo" value="variedade">
+									<input type="hidden" name="id" value="${c.value.produtoVariedade.idProduto}">
+									<button class="btn btn-warning mt-3"><i class="far fa-edit"></i></button>
+								</form>
+								<form onsubmit="criarModalConfirmacao('Confirmação','Deseja realmente remover este item do seu carrinho?',this,'ACAO_NEGATIVA'); return false" action="carrinho.html" method="POST" class="float-right">
+									<input type="hidden" name="acao" value="removerProduto">
+									<input type="hidden" name="id" value="${c.value.produtoVariedade.idProduto}">
+									<button class="btn btn-danger mt-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+								</form>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+	
+			</div>
+		</c:if>
+	</div>
+	
+					<footer>
+			<div class="bg-dark py-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-7">
+							<h4 class="text-laranja-escuro mb-3 font-monospace">Pizzaria Zefra </h4>
+							<span class="text-light">CNPJ:</span>  <span class="text-muted">91.964.632/0001-20<br></span>
+							<span class="text-light">Email:</span> <span class="text-muted">pizzariazefra@gmail.com</span>
+						</div>
+						<div class="mt-3 mt-sm-0 col-sm-5 border-semitransparente-25">				
+							<div class="row pt-2">
+								<div class="col text-light display-4 text-lg-right">
+									<i class="fab fa-facebook"></i>
+									<i class="fab fa-twitter"></i>
+									<i class="fab fa-instagram"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-preto py-2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 text-muted text-center">
+							© 2018 - Desenvolvido por Leandro Rocha Musser Carneiro - leandro.musser@gmail.com
+							<a href="#" class="d-none d-sm-block text-light float-right">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>						
+						<div class="col-12 mt-3 text-center d-block d-sm-none">
+							<a href="#topo" class="text-light">Topo <i class="fas fa-arrow-up"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+<div id="modalConfirmacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalConfirmacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3" id="modalConfirmacao-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalConfirmacao-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+				</div>
+				<div class="col-6">
+					<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalAvaliacao" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalAvaliacao-titulo" class="modal-title lead m-auto"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<form action="avaliarproduto.html" method="POST">
+				<div class="row">
+					<div class="col">
+						<label for="modalAvaliacao-textoAvaliacao">
+							Comentário <span class="text-muted font-monospace">(opcional)</span>
+						</label>
+						<textarea name="comentario" id="modalAvaliacao-textoAvaliacao" class="rounded texto-avaliacao" rows="6" class="form-control" placeholder="O que você achou do produto?"></textarea>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<label for="modalAvaliacao-notas">
+							Nota de 0 a 10
+						</label>
+						<select name="nota" id="modalAvaliacao-notas" class="form-control">
+							<c:forEach begin="0" end="10" varStatus="notas">
+								<option class="modalAvaliacao-option-nota modalAvaliacao-nota-${notas.index}" value="${notas.index}">${notas.index}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-6">
+						<input type="hidden" name="idProduto" id="modalAvaliacao-idProduto" value="0">
+						<button id="modalAvaliacao-enviar" class="form-control btn btn-success">Salvar</button>
+					</div>
+					<div class="col-6">
+						<button class="form-control btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<c:if test="${fn:length(tipoPagamento) != 0}">
+
+	<div id="modalConfirmacaoPedido" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+			<h5 id="modalConfirmacaoPedido-titulo" class="modal-title lead m-auto"></h5>
+	      </div>
+	      <div class="modal-body">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="py-3 text-center" id="modalConfirmacaoPedido-mensagem">
+						</div>
+						
+						<div class="mt-2">
+							<label for="modalConfirmacaoPedido-tipoPagamento" class="d-block text-muted">Tipo de pagamento</label>
+							<select id="modalConfirmacaoPedido-tipoPagamento" name="tipoPagamento" class="form-control">
+								<c:forEach items="${tipoPagamento}" var="tp">
+									<option value="${tp.id}"><c:out value="${tp.tipo}"></c:out></option>
+								</c:forEach>
+								<!--
+								<option value="1">Dinheiro</option>
+								<option value="2">Cartão de Crédito</option>
+								<option value="3">Cartão de Débito</option>
+								 -->
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	      </div>
+	      
+	      <div class="modal-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<button id="modalConfirmacaoPedido-sim" type="button" class="form-control btn btn-pizza">Sim</button>
+					</div>
+					<div class="col-6">
+						<button type="button" class="form-control btn btn-secondary" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</c:if>
+
+
+
+<div id="modalSucesso" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalSucesso-titulo" class="m-auto text-success modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalSucesso-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalSucesso-ok" data-dismiss="modal" type="button" class="form-control btn">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalErro" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalErro-titulo" class="m-auto text-danger modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3 text-center" id="modalErro-mensagem">
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<button id="modalErro-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalEdicaoCarrinho" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5 id="modalEdicaoCarrinho-titulo" class="m-auto modal-title"></h5>
+      </div>
+      <div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="py-3">
+						<div class="form-group">
+							<label for="quantidade">Quantidade</label>
+							<input class="form-control" type="number" class="form-control" id="modalEdicaoCarrinho-quantidade">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-salvar" type="button" class="form-control btn btn-warning">Salvar</button>
+				</div>
+				<div class="col-6">
+					<button id="modalEdicaoCarrinho-ok" data-dismiss="modal" type="button" class="form-control btn btn-secondary">Fechar</button>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+		<script charset="utf-8" src="js/modal.js"></script>
+		<script charset="utf-8" src="js/produto.js"></script>
+				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+		
+		<c:if test="${sessionScope.carrinhoRemoverSucesso == true}">
+			<script>
+				//criarModalSucesso("Sucesso!", "O produto foi removido do seu carrinho.");
+				
+				//(?) O cache dos navegadores modernos vai salvar esse script.
+				//	  Fica ruim ao tentar voltar (usando recursos do navegador)...
+				//	  ...para uma página que tenha exibido ele assim
+				//    Vai abrir o modal toda hora, por isso removi do código.
+				
+			</script>
+		</c:if>
+		<c:set var="carrinhoRemoverSucesso" value="false" scope="session"  />
+	</body>
+</html>
