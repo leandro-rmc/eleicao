@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Zefra</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="icon" href="img/icon.ico">
+        <link href="css/style.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->  
+    </head>
+    <body>
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="navbar navbar-inverse">
+					<div class="navbar-header">
+						<a href="index.html" class="navbar-brand">ZEFRA</a>
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Menu">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="navbar-collapse collapse" id="Menu">
+						<ul class="nav navbar-nav">
+							<li ><a href="index.html">Home</a></li>
+							<li ><a href="#">Perfil</a></li>
+							<li ><a href="comunidades.html">Comunidades</a></li> 
+							<li ><a href="pessoas.html">Pessoas</a></li>
+							<li ><a href="mensagens.html">Mensagens <span class="nonbold notificacao-mensagem-nav">(1)</span></a></li>
+							<li><a href="#" data-toggle="modal" data-target="#notificacoes"><i class="fa fa-bell notificacao" aria-hidden="true"></i><span class="label">3</span></a></li>												
+							<li class="dropdown hidden-xs">
+							  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+							  <ul class="dropdown-menu pull-right">
+								<li ><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Configurações</a></li>
+								<li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+							  </ul>
+							</li>
+							<hr>
+							<li class="hidden-lg hidden-md hidden-sm "><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Configurações</a></li>
+							<li class="hidden-lg hidden-md hidden-sm"><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div class="modal fade" id="notificacoes">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title">Notificações</h3>
+						</div>
+						<div class="modal-body modal-notificacao">
+						
+							<div class="row caixa-notificacao bg-notificacao-nova">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/akira_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Akira Zaizen</a> comentou uma <a href="#">publicação</a> que você segue.
+									</div>
+									<div class="row .tempo">
+										11 minutos atrás.
+									</div>
+								</div>
+							</div>
+							
+							<div class="row caixa-notificacao bg-notificacao-nova">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/blueangel_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Aoi Zaizen</a> comentou sua <a href="#">publicação</a>.
+									</div>
+									<div class="row .tempo">
+										17 minutos atrás.
+									</div>
+								</div>
+							</div>
+							
+							<div class="row caixa-notificacao bg-notificacao-nova">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/blueangel_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Aoi Zaizen</a> curtiu sua <a href="#">publicação</a>.
+									</div>
+									<div class="row .tempo">
+										19 minutos atrás.
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="row caixa-notificacao">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/yusaku_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="perfil_2.html">Yusaku Fujiki</a> comentou uma <a href="#">publicação</a> que você segue na comunidade <a href="comunidade_2.html">Yu-Gi-Oh! VRAINS</a>.
+									</div>
+									<div class="row .tempo">
+										44 minutos atrás.
+									</div>
+								</div>
+							</div>
+							
+							<div class="row caixa-notificacao">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/leandrorocha_perfil.jpg" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Leandro Rocha Musser</a> te convidou para jogar <a href="https://www.duelingbook.com/">Dueling Book</a>.
+									</div>
+									<div class="row .tempo">
+										2 horas atrás.
+									</div>
+								</div>
+							</div>
+							<div class="row caixa-notificacao">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/goonizuka_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Go Onizuka</a> curtiu sua <a href="#">publicação</a>.
+									</div>
+									<div class="row .tempo">
+										4 horas atrás.
+									</div>
+								</div>
+							</div>
+							<div class="row caixa-notificacao">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/goonizuka_perfil.png" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Go Onizuka</a> comentou uma <a href="#">publicação</a> que você segue na comunidade <a href="comunidade_2.html">Yu-Gi-Oh! VRAINS</a>.
+									</div>
+									<div class="row .tempo">
+										5 horas atrás.
+									</div>
+								</div>
+							</div>
+							<div class="row caixa-notificacao">
+								<div class="col-xs-4 col-sm-2">
+									<img src="img/hitoshura_perfil.jpg" class="img-responsive img-rounded">
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="row">
+										<a href="#">Hitoshura</a> respondeu seu <a href="#">comentário</a> na comunidade <a href="comunidade_2.html">Desenvolvimento Android</a>.
+									</div>
+									<div class="row .tempo">
+										6 horas atrás.
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="container">
+		<div class="row caixa caixa-perfil">
+			<div class="col-xs-12 col-sm-4" style="background-color:#f2f2f2;">
+				<div class="thumbnail thumbnail-perfil">
+					<img src="img/yusaku_perfil.png" class="img-responsive img-responsive-center img-rounded">
+					<div class="row">
+						<h3><a href="perfil_2.html">Yusaku Fujiki</a></h3>
+					</div>
+					<div class="row">
+						<i class="fa fa-circle" aria-hidden="true"></i> Cidade: <a href="#" class="nonbold">Den City</a>
+					</div>
+					<div class="row">
+						<i class="fa fa-circle" aria-hidden="true"></i> Idade: <span class="nonbold">16 anos</span>
+					</div>
+					<div class="row">
+						<i class="fa fa-circle" aria-hidden="true"></i> Estuda em: <a class="nonbold" href="#">Den City High School</a>
+					</div>
+					<div class="row">
+						<i class="fa fa-circle" aria-hidden="true"></i> É um membro da <span class="zefra-titulo">ZEFRA</span> desde 15/12/2017.
+					</div>
+					<div class="row online">
+						<i class="fa fa-circle" aria-hidden="true"></i> Online agora
+					</div>
+					<div class="row">
+						<hr>
+						<a href="#">Excluir dos amigos</a>
+					</div>
+					<div class="row">
+						<a href="#">Enviar mensagem</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-sm-3 col-sm-offset-1 hidden-xs">
+				<div class="thumbnail perfil-icone-menu">
+					<div class="caption text-center">
+						<h4>Fotos</h4>
+					</div>
+					<a href="#"><img src="img/fotos-icone.png" class="img-responsive"></a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3  hidden-xs">
+				<div class="thumbnail perfil-icone-menu">
+					<div class="caption text-center">
+						<h4>Amigos</h4>
+					</div>
+					<a href="#"><img src="img/amigos-icone.png" class="img-responsive"></a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-sm-offset-1  hidden-xs">
+				<div class="thumbnail perfil-icone-menu">
+					<div class="caption text-center">
+						<h4>Comunidades</h4>
+					</div>
+					<a href="#"><img src="img/comunidades-icone.png" class="img-responsive"></a>
+				</div>
+			</div>
+		</div>
+		<div class="row menuMobile hidden-sm hidden-md hidden-lg hidden-xl">
+			<div class="row">
+				<a href="#"><i class="fa fa-camera" aria-hidden="true"></i> Fotos</a>
+			</div>
+			<div class="row">
+				<a href="#"><i class="fa fa-user" aria-hidden="true"></i> Amigos</a>
+			</div>
+			<div class="row">
+				<a href="#"><i class="fa fa-users" aria-hidden="true"></i> Comunidades</a>
+			</div>
+		</div>
+		<hr>
+			<div class="row postagem-perfil">
+				<div class="col-xs-3 col-sm-2">
+					<img src="img/yusaku_perfil.png" class="img-responsive img-rounded">
+				</div>
+				<div class="col-xs-9 col-sm-10">
+					<div class="row">
+						<a href="perfil_2.html">Yusaku Fujiki</a> 
+					</div>
+					<div class="row">
+						<span class="tempo">37 minutos atrás</a>
+					</div>
+					<div class="row">
+						<a href="#">5 curtidas</a>
+					</div>
+					<div class="row postagem-perfil-mensagem">
+						Spectre tem mostrado ser um dos melhores personagens do anime. Episódio muito bom <a href="#">#VRAINS35</a>
+					</div>
+					<div class="row">
+						<a href="#">Responder (2)</a>
+					</div>
+				</div>
+			</div>
+			<div class="row postagem-perfil">
+				<div class="col-xs-3 col-sm-2">
+					<img src="img/yusaku_perfil.png" class="img-responsive img-rounded">
+				</div>
+				<div class="col-xs-9 col-sm-10">
+					<div class="row">
+						<a href="perfil_2.html">Yusaku Fujiki</a> 
+					</div>
+					<div class="row">
+						<span class="tempo">2 horas atrás</a>
+					</div>
+					<div class="row">
+						<a href="#">3 curtidas</a>
+					</div>
+					<div class="row postagem-perfil-mensagem">
+						Participe da nossa comunidade de Yu-Gi-Oh! VRAINS: <a href="comunidade_2.html">https://zefra.com.br/comunidade_2.html</a>
+					</div>
+					<div class="row">
+						<a href="#">Responder</a>
+					</div>
+				</div>
+			</div>
+			<div class="row postagem-perfil">
+				<div class="col-xs-3 col-sm-2">
+					<img src="img/yusaku_perfil.png" class="img-responsive img-rounded">
+				</div>
+				<div class="col-xs-9 col-sm-10">
+					<div class="row">
+						<a href="perfil_2.html">Yusaku Fujiki</a> 
+					</div>
+					<div class="row">
+						<span class="tempo">5 horas atrás</a>
+					</div>
+					<div class="row">
+						<a href="#">1 curtidas</a>
+					</div>
+					<div class="row postagem-perfil-mensagem">
+						Para os novatos no Speed Duel, deixo aqui um tutorial: <a href="#">http://yugioh.wikia.com/wiki/Speed_Duel_(format)</a>
+					</div>
+					<div class="row">
+						<a href="#">Responder (1)</a>
+					</div>
+				</div>
+			</div>
+	</div>
+		<div class="consertar-footer"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<footer class="footer-customizado navbar-inverse">
+					<a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+					<a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+					<a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+					<a href="#"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
+				</footer>
+			</div>
+		</div>
+		<script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
