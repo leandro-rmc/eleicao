@@ -2,4 +2,4 @@
 
 Trabalhos e projetos feitos no curso Técnico em Informática, do SENAC. Todos eles foram feitos do zero (exceções foram deixadas claras lá) com meu nível de conhecimento da época (2017 a 2018). No Front-End, usei Bootstrap, jQuery, Wow.js, mas também foi usado CSS e JavaScript puros em certos trabalhos e projetos.
 
-👉🏻 [Visualizar na Web](https://leandro-rmc.github.io/)
+👉🏻 [Visualizar na Web](https://leandromusser.github.io/)
